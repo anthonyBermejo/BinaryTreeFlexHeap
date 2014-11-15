@@ -99,7 +99,26 @@ public class ArrayList {
 	 */
 	public boolean isEmpty() {
 		return (size == 0);
-	}	
+	}
+	
+	/**
+	 * Returns the index of a specific node in the array list. Returns -1 if not found
+	 * @param p Node to be found in array list
+	 * @return Index of node, -1 if not found
+	 */
+	public int indexOf(Node p)
+	{
+		int index = -1;
+		
+		for (int i = 0; i < size; i++) {
+			if (p.getKey() == array[i].getKey()) {
+				index = i;
+				break;
+			}
+		}
+		
+		return index;
+	}
 
 	/*
 	 * Verifies if the size of the list is at 80% capacity

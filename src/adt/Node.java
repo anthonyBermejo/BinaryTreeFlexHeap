@@ -5,7 +5,7 @@ import interfaces.Position;
 /**
  * Class representing a Node object that holds a value and it's current Position
  * 
- * @author Anthony-Virgil Bermejo (6982166)
+ * @author Anthony-Virgil Bermejo (6982166), Venelin Koulaxazov
  */
 public class Node implements Position {
 	private char value;

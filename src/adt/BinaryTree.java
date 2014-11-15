@@ -1,6 +1,5 @@
 package adt;
 
-import java.util.Iterator;
 import adt.ArrayList;
 
 public class BinaryTree {
@@ -33,11 +32,17 @@ public class BinaryTree {
 	
 	public Node parent(Node p)
 	{
+		Node aNode = null;
 		Node parent = null;
+		int index = list.indexOf(p);
 		
+		if (index != -1) {
+			aNode = list.get(index);
+			parent = aNode.getParent();
+		}
+		// else throw exception?
 		
-		
-		return null;
+		return parent;
 	}
 	
 	//Iterable children(p)
@@ -62,34 +67,57 @@ public class BinaryTree {
 	{
 		Node root = list.get(1);
 		
-		
-		
-		return true;
+		if (root != null)
+			return true;
+		else
+			return false;
 	}
 	
 	public char replace(Node p, char c)
 	{
-		return 'c';
+		Node aNode = null;
+		Node newNode = null;
+		char oldValue = 0;
+		int index = list.indexOf(p);
+		
+		if (index != -1) {
+			aNode = list.get(index);
+			oldValue = aNode.element();
+			newNode = new Node(aNode.getKey(), aNode.getParent(), c);
+			list.set(index, newNode);
+			
+			aNode = null;
+			newNode = null;
+		}
+		// else throw exception?
+		
+		return oldValue;
 	}
 	
 	public Node left(Node p)
 	{
-		return null;
+		return p.getLeft();
 	}
 	
 	public Node right(Node p)
 	{
-		return null;
+		return p.getRight();
 	}
 	
 	public boolean hasLeft(Node p)
 	{
-		return true;
+		if (p.getLeft() != null)
+			return true;
+		else
+			return false;
 	}
 	
 	public boolean hasRight(Node p)
 	{
-		return true;
+		if (p.getRight() != null)
+			return true;
+		else
+			return false;
 	}
 
 }
