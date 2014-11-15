@@ -71,7 +71,7 @@ public class BinaryTree {
 			return true;
 		else
 			return false;
-	}
+	}//
 	
 	public char replace(Node p, char c)
 	{

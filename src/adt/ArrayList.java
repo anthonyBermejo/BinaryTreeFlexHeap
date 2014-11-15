@@ -100,7 +100,7 @@ public class ArrayList {
 	public boolean isEmpty() {
 		return (size == 0);
 	}
-	
+//	
 	/**
 	 * Returns the index of a specific node in the array list. Returns -1 if not found
 	 * @param p Node to be found in array list
