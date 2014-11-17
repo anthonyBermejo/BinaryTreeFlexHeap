@@ -33,7 +33,9 @@ public class ArrayList {
 
 	/**
 	 * Returns the node within the array list of a given node
-	 * @param n Node to be found
+	 * 
+	 * @param n
+	 *            Node to be found
 	 * @return Null, if not found, Reference to the node if found
 	 */
 	public Node get(Node n) {
@@ -46,7 +48,7 @@ public class ArrayList {
 				break;
 			}
 		}
-		
+
 		return aNode;
 	}
 
