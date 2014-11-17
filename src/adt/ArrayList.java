@@ -119,7 +119,7 @@ public class ArrayList {
 		int index = -1;
 
 		for (int i = 0; i < size; i++) {
-			if (p.getKey() == array[i].getKey()) {
+			if (p.getKey() == array[i].getKey() && p.element() == array[i].element()) {
 				index = i;
 				break;
 			}

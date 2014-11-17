@@ -157,6 +157,11 @@ public class BinaryTree {
 		else
 			return false;
 	}
+	
+	public Node get(Node n)
+	{		
+		return list.get(list.indexOf(n));
+	}
 
 	/**
 	 * Replaces the value of the specified node with a new one.
