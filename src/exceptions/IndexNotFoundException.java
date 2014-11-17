@@ -3,7 +3,7 @@ package exceptions;
 /**
  * Custom exception for when an index is not found within an ArrayList
  * 
- * @author Anthony-Virgil Bermejo (6982166), Venelin Koulaxazov (6982425)
+ * @author Venelin Koulaxazov (6982425)
  * @version 1.0
  */
 public class IndexNotFoundException extends Exception {
@@ -19,7 +19,7 @@ public class IndexNotFoundException extends Exception {
 	}
 
 	/**
-	 * Constructs a IndexNotFoundException with the specified message. 
+	 * Constructs a IndexNotFoundException with the specified message.
 	 * 
 	 * @param message
 	 *            the error message.
