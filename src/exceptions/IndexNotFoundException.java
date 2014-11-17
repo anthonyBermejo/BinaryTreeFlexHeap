@@ -19,7 +19,7 @@ public class IndexNotFoundException extends Exception {
 	}
 
 	/**
-	 * Constructs a IndexNotFoundException with the specified message.
+	 * Constructs a IndexNotFoundException with the specified message. 
 	 * 
 	 * @param message
 	 *            the error message.
