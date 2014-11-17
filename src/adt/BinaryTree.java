@@ -158,9 +158,14 @@ public class BinaryTree {
 			return false;
 	}
 	
+	/**
+	 * Returns the node within the binary tree of a given node
+	 * @param n Node to be found
+	 * @return Null if not found, Reference to the node if found
+	 */
 	public Node get(Node n)
 	{		
-		return list.get(list.indexOf(n));
+		return list.get(n);
 	}
 
 	/**

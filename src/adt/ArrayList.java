@@ -32,6 +32,25 @@ public class ArrayList {
 	}
 
 	/**
+	 * Returns the node within the array list of a given node
+	 * @param n Node to be found
+	 * @return Null if not found, Reference to the node if found
+	 */
+	public Node get(Node n) {
+		Node aNode = null;
+
+		for (int i = 0; i < size; i++) {
+			if (n.getKey() == array[i].getKey()
+					&& n.element() == array[i].element()) {
+				aNode = n;
+				break;
+			}
+		}
+		
+		return aNode;
+	}
+
+	/**
 	 * Replaces the element at the given index with the value being sent in
 	 * 
 	 * @param index
@@ -119,7 +138,8 @@ public class ArrayList {
 		int index = -1;
 
 		for (int i = 0; i < size; i++) {
-			if (p.getKey() == array[i].getKey() && p.element() == array[i].element()) {
+			if (p.getKey() == array[i].getKey()
+					&& p.element() == array[i].element()) {
 				index = i;
 				break;
 			}
@@ -127,7 +147,7 @@ public class ArrayList {
 
 		return index;
 	}
-	
+
 	/**
 	 * Overriden toString() method
 	 */
