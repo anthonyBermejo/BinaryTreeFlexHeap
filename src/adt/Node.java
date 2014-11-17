@@ -103,4 +103,13 @@ public class Node implements Position {
 	public void setRight(Node right) {
 		this.right = right;
 	}
+
+	/**
+	 * Overriden toString() method
+	 */
+	@Override
+	public String toString() {
+		return "Node [value=" + value + ", parent=" + parent + ", key=" + key
+				+ ", left=" + left + ", right=" + right + "]";
+	}
 }
