@@ -44,7 +44,7 @@ public class ArrayList {
 		for (int i = 0; i < size; i++) {
 			if (n.getKey() == array[i].getKey()
 					&& n.element() == array[i].element()) {
-				aNode = n;
+				aNode = array[i];
 				break;
 			}
 		}
@@ -79,10 +79,7 @@ public class ArrayList {
 	 */
 	public void add(int index, Node value) {
 
-		if (index < size) {
-			// shift all elements
-			shiftArray(index, size + 1);
-		}
+		shiftArray(index, size + 1);
 
 		array[index] = value;
 

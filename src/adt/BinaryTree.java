@@ -46,6 +46,7 @@ public class BinaryTree {
 	public Node root() {
 		if (isEmpty())
 			return null;
+		
 		return list.get(1);
 	}
 
@@ -55,9 +56,9 @@ public class BinaryTree {
 	 * @param p
 	 *            new root of the tree
 	 */
-	public void setRoot(Node p) {
-		if (p != null)
-			list.set(1, p);
+	public void setRoot(Node n) {
+		if (n != null)
+			list.set(1, n);
 	}
 
 	/**
@@ -72,6 +73,7 @@ public class BinaryTree {
 		int parentIndex = list.indexOf(parent);
 
 		if (parentIndex != -1) {
+			parent = list.get(parentIndex);
 			parent.setLeft(child);
 			child.setParent(parent);
 			list.add(parentIndex * 2, child);
@@ -90,6 +92,7 @@ public class BinaryTree {
 		int parentIndex = list.indexOf(parent);
 
 		if (parentIndex != -1) {
+			parent = list.get(parentIndex);
 			parent.setRight(child);
 			child.setParent(parent);
 			list.add(parentIndex * 2 + 1, child);
@@ -154,7 +157,7 @@ public class BinaryTree {
 	}
 
 	public Node get(Node n) {
-		return list.get(list.indexOf(n));
+		return list.get(n);
 	}
 
 	/**
@@ -229,6 +232,11 @@ public class BinaryTree {
 	 */
 	public boolean hasRight(Node p) {
 		return (p.getRight() != null);
+	}
+
+	@Override
+	public String toString() {
+		return "BinaryTree [list=" + list + "]";
 	}
 
 }
