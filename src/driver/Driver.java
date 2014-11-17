@@ -10,7 +10,7 @@ public class Driver {
 		
 		tree.setRoot(new Node(7, null, 'c'));
 		tree.addLeft(tree.root(), new Node(1, tree.root(), 'f'));
-		tree.addRight(t, child);
+		tree.addRight(new Node());///
 		
 	}
 
