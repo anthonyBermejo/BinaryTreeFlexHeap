@@ -2,13 +2,19 @@ package adt;
 
 import java.util.Arrays;
 
+/**
+ * Definition of the ArrayList ADT.
+ * 
+ * @author Anthony-Virgil Bermejo (6982166), Venelin Koulaxazov (6982425)
+ */
 public class ArrayList {
 
+	// member variable declarations
 	private Node[] array;
 	int size;
 
 	/**
-	 * Constructor, ah shieeet
+	 * Default constructor
 	 */
 	public ArrayList() {
 		array = new Node[10];
@@ -100,25 +106,38 @@ public class ArrayList {
 	public boolean isEmpty() {
 		return (size == 0);
 	}
-//	
+
 	/**
-	 * Returns the index of a specific node in the array list. Returns -1 if not found
-	 * @param p Node to be found in array list
+	 * Returns the index of a specific node in the array list. Returns -1 if not
+	 * found
+	 * 
+	 * @param p
+	 *            Node to be found in array list
 	 * @return Index of node, -1 if not found
 	 */
-	public int indexOf(Node p)
-	{
+	public int indexOf(Node p) {
 		int index = -1;
-		
+
 		for (int i = 0; i < size; i++) {
 			if (p.getKey() == array[i].getKey()) {
 				index = i;
 				break;
 			}
 		}
-		
+
 		return index;
 	}
+	
+	/**
+	 * Overriden toString() method
+	 */
+	@Override
+	public String toString() {
+		return "ArrayList [array=" + Arrays.toString(array) + ", size=" + size
+				+ "]";
+	}
+
+	// private methods
 
 	/*
 	 * Verifies if the size of the list is at 80% capacity
@@ -127,7 +146,7 @@ public class ArrayList {
 		if (((float) size / array.length) >= 0.8)
 			expandArray();
 	}
-	
+
 	/*
 	 * Expands the array at double its length
 	 */
@@ -150,14 +169,5 @@ public class ArrayList {
 			array[i] = temp2;
 			temp2 = temp1;
 		}
-	}
-
-	/*
-	 * Overriden toString() method
-	 */
-	@Override
-	public String toString() {
-		return "ArrayList [array=" + Arrays.toString(array) + ", size=" + size
-				+ "]";
 	}
 }
