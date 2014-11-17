@@ -39,6 +39,25 @@ public class Node implements Position {
 	}
 
 	/**
+	 * Overriden equals(Object obj) method
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Node other = (Node) obj;
+		if (key != other.key)
+			return false;
+		if (value != other.value)
+			return false;
+		return true;
+	}
+
+	/**
 	 * Returns the current Position of the Node within the Node List
 	 * 
 	 * @return current Position
@@ -111,4 +130,5 @@ public class Node implements Position {
 	public String toString() {
 		return "Node [value=" + value + ", key=" + key + "]";
 	}
+
 }
