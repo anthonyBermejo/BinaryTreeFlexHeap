@@ -135,9 +135,7 @@ public class ArrayList {
 	 */
 	public Node set(int index, Node value) {
 		Node oldNode = array[index];
-
 		array[index] = value;
-
 		return oldNode;
 	}
 
