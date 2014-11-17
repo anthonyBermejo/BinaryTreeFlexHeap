@@ -2,146 +2,235 @@ package adt;
 
 import adt.ArrayList;
 
+/**
+ * Definition of the BinaryTree ADT.
+ * 
+ * @author Anthony-Virgil Bermejo (6982166), Venelin Koulaxazov (6982425)
+ */
 public class BinaryTree {
-	
+
+	// member variable declarations
 	private ArrayList list;
-	
-	public BinaryTree() 
-	{
+
+	/**
+	 * Default constructor
+	 */
+	public BinaryTree() {
 		list = new ArrayList();
 	}
-	
-	public int size()
-	{
+
+	/**
+	 * Returns the size of the BinaryTree.
+	 * 
+	 * @return size of the tree
+	 */
+	public int size() {
 		return list.size();
 	}
-	
-	public boolean isEmpty()
-	{
+
+	/**
+	 * Verifies whether the tree is empty.
+	 * 
+	 * @return true if the tree is empty; false otherwise
+	 */
+	public boolean isEmpty() {
 		return list.isEmpty();
 	}
-	
-	//public Iterator iterator()
-	
-	//public Iterable positions()
-	
-	public Node root()
-	{
+
+	/**
+	 * Returns the root of the tree.
+	 * 
+	 * @return root of the tree
+	 */
+	public Node root() {
 		return list.get(1);
 	}
-	
-	public void setRoot(Node p)
-	{
+
+	/**
+	 * Sets the root of the tree.
+	 * 
+	 * @param p
+	 *            new root of the tree
+	 */
+	public void setRoot(Node p) {
 		if (list.get(1) == null && p != null)
 			list.set(1, p);
 	}
-	
-	public void addLeft(Node parent, Node child)
-	{
+
+	/**
+	 * Adds a left child to the specified node.
+	 * 
+	 * @param parent
+	 *            the parent to whom a child will be added
+	 * @param child
+	 *            the new left child
+	 */
+	public void addLeft(Node parent, Node child) {
 		int parentIndex = list.indexOf(parent);
-		
+
 		if (parentIndex != -1) {
 			parent.setLeft(child);
 			child.setParent(parent);
 			list.add(parentIndex * 2, child);
 		}
 	}
-	
-	public void addRight(Node parent, Node child)
-	{
+
+	/**
+	 * Adds a right child to the specified node.
+	 * 
+	 * @param parent
+	 *            the parent to whom a child will be added
+	 * @param child
+	 *            the new right child
+	 */
+	public void addRight(Node parent, Node child) {
 		int parentIndex = list.indexOf(parent);
-		
+
 		if (parentIndex != -1) {
 			parent.setRight(child);
 			child.setParent(parent);
 			list.add(parentIndex * 2 + 1, child);
 		}
 	}
-	
-	public Node parent(Node p)
-	{
+
+	/**
+	 * Returns the parent of the specified node.
+	 * 
+	 * @param p
+	 *            the node for which a parent will be returned
+	 * @return parent of the node p
+	 */
+	public Node parent(Node p) {
 		Node aNode = null;
 		Node parent = null;
 		int index = list.indexOf(p);
-		
+
 		if (index != -1) {
 			aNode = list.get(index);
 			parent = aNode.getParent();
 		}
 		// else throw exception?
-		
+
 		return parent;
 	}
-	
-	//Iterable children(p)
-	
-	public boolean isExternal(Node p)
-	{
+
+	/**
+	 * Verifies whether the specified node is external.
+	 * 
+	 * @param p
+	 *            the node which will be verified
+	 * @return true if the node is external; false otherwise
+	 */
+	public boolean isExternal(Node p) {
 		if (!hasLeft(p) && !hasRight(p))
 			return true;
 		else
 			return false;
 	}
-	
-	public boolean isInternal(Node p)
-	{
+
+	/**
+	 * Verifies whether the specified node is internal.
+	 * 
+	 * @param p
+	 *            the node which will be verified
+	 * @return true if the node is internal; false otherwise
+	 */
+	public boolean isInternal(Node p) {
 		if (hasLeft(p) || hasRight(p))
 			return true;
 		else
 			return false;
 	}
-	
-	public boolean isRoot(Node p)
-	{
+
+	/**
+	 * Verifies if the specified node is the root of the tree.
+	 * 
+	 * @param p
+	 *            the node which will be verified
+	 * @return true if the node is the root of the tree; false otherwise
+	 */
+	public boolean isRoot(Node p) {
 		Node root = list.get(1);
-		
+
 		if (root != null)
 			return true;
 		else
 			return false;
-	}//
-	
-	public char replace(Node p, char c)
-	{
+	}
+
+	/**
+	 * Replaces the value of the specified node with a new one.
+	 * 
+	 * @param p
+	 *            the node whose value will be changed
+	 * @param c
+	 *            the new value
+	 * @return
+	 */
+	public char replace(Node p, char c) {
 		Node aNode = null;
 		Node newNode = null;
 		char oldValue = 0;
 		int index = list.indexOf(p);
-		
+
 		if (index != -1) {
 			aNode = list.get(index);
 			oldValue = aNode.element();
 			newNode = new Node(aNode.getKey(), aNode.getParent(), c);
 			list.set(index, newNode);
-			
+
 			aNode = null;
 			newNode = null;
 		}
 		// else throw exception?
-		
+
 		return oldValue;
 	}
-	
-	public Node left(Node p)
-	{
+
+	/**
+	 * Returns the left child of the specified node.
+	 * 
+	 * @param p
+	 *            the node for which the left child will be returned
+	 * @return left child of the node p.
+	 */
+	public Node left(Node p) {
 		return p.getLeft();
 	}
-	
-	public Node right(Node p)
-	{
+
+	/**
+	 * Returns the right child of the specified node.
+	 * 
+	 * @param p
+	 *            the node for which the right child will be returned
+	 * @return right child of the node p.
+	 */
+	public Node right(Node p) {
 		return p.getRight();
 	}
-	
-	public boolean hasLeft(Node p)
-	{
+
+	/**
+	 * Verifies whether the specified node has a left child.
+	 * 
+	 * @param p
+	 *            the node which will be verified
+	 * @return true if the node has a left child; false otherwise
+	 */
+	public boolean hasLeft(Node p) {
 		if (p.getLeft() != null)
 			return true;
 		else
 			return false;
 	}
-	
-	public boolean hasRight(Node p)
-	{
+
+	/**
+	 * Verifies whether the specified node has a right child.
+	 * 
+	 * @param p
+	 *            the node which will be verified
+	 * @return true if the node has a right child; false otherwise
+	 */
+	public boolean hasRight(Node p) {
 		if (p.getRight() != null)
 			return true;
 		else
