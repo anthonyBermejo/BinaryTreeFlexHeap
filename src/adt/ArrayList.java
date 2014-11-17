@@ -32,7 +32,7 @@ public class ArrayList {
 	}
 
 	/**
-	 * Returns the node within the array list of a given node
+	 * Returns the node within the array list -- the fuck? ---> of a given node
 	 * 
 	 * @param n
 	 *            Node to be found
@@ -112,12 +112,8 @@ public class ArrayList {
 	 * 
 	 * @return size of array list
 	 */
-	public int getSize() {
+	public int size() {
 		return size;
-	}
-
-	public void setSize(int size) {
-		this.size = size;
 	}
 
 	/**
