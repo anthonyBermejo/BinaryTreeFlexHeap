@@ -8,7 +8,7 @@ public class ArrayList {
 	int size;
 
 	/**
-	 * Constructor
+	 * Constructor, ah shieeet
 	 */
 	public ArrayList() {
 		array = new Node[10];
