@@ -1,7 +1,6 @@
 package driver;
 
-import adt.ArrayList;
-import adt.BinaryTree;
+import adt.*;
 
 public class Driver {
 
@@ -9,7 +8,9 @@ public class Driver {
 		
 		BinaryTree tree = new BinaryTree();
 		
-		
+		tree.setRoot(new Node(7, null, 'c'));
+		tree.addLeft(tree.root(), new Node(1, tree.root(), 'f'));
+		tree.addRight(t, child);
 		
 	}
 
