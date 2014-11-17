@@ -81,8 +81,7 @@ public class BinaryTree {
 			parent = list.get(parentIndex);
 			parent.setLeft(child);
 			child.setParent(parent);
-			list.set(parentIndex * 2, child);
-			list.setSize(getSize() + 1);
+			list.add(parentIndex * 2, child);
 		}
 	}
 
@@ -102,7 +101,6 @@ public class BinaryTree {
 			parent.setRight(child);
 			child.setParent(parent);
 			list.add(parentIndex * 2 + 1, child);
-			list.setSize(getSize() + 1);
 		}
 	}
 
