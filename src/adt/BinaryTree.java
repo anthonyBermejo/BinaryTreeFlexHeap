@@ -1,5 +1,6 @@
 package adt;
 
+import exceptions.NodeNotFoundException;
 import adt.ArrayList;
 
 /**
@@ -43,6 +44,8 @@ public class BinaryTree {
 	 * @return root of the tree
 	 */
 	public Node root() {
+		if (isEmpty())
+			return null;
 		return list.get(1);
 	}
 
@@ -53,7 +56,7 @@ public class BinaryTree {
 	 *            new root of the tree
 	 */
 	public void setRoot(Node p) {
-		if (list.get(1) == null && p != null)
+		if (p != null)
 			list.set(1, p);
 	}
 
@@ -99,8 +102,9 @@ public class BinaryTree {
 	 * @param p
 	 *            the node for which a parent will be returned
 	 * @return parent of the node p
+	 * @throws NodeNotFoundException
 	 */
-	public Node parent(Node p) {
+	public Node parent(Node p) throws NodeNotFoundException {
 		Node aNode = null;
 		Node parent = null;
 		int index = list.indexOf(p);
@@ -108,8 +112,8 @@ public class BinaryTree {
 		if (index != -1) {
 			aNode = list.get(index);
 			parent = aNode.getParent();
-		}
-		// else throw exception?
+		} else
+			throw new NodeNotFoundException();
 
 		return parent;
 	}
@@ -122,10 +126,7 @@ public class BinaryTree {
 	 * @return true if the node is external; false otherwise
 	 */
 	public boolean isExternal(Node p) {
-		if (!hasLeft(p) && !hasRight(p))
-			return true;
-		else
-			return false;
+		return (!hasLeft(p) && !hasRight(p));
 	}
 
 	/**
@@ -136,10 +137,7 @@ public class BinaryTree {
 	 * @return true if the node is internal; false otherwise
 	 */
 	public boolean isInternal(Node p) {
-		if (hasLeft(p) || hasRight(p))
-			return true;
-		else
-			return false;
+		return (hasLeft(p) || hasRight(p));
 	}
 
 	/**
@@ -152,20 +150,11 @@ public class BinaryTree {
 	public boolean isRoot(Node p) {
 		Node root = list.get(1);
 
-		if (root != null)
-			return true;
-		else
-			return false;
+		return (root != null);
 	}
-	
-	/**
-	 * Returns the node within the binary tree of a given node
-	 * @param n Node to be found
-	 * @return Null, if not found, Reference to the node if found
-	 */
-	public Node get(Node n)
-	{		
-		return list.get(n);
+
+	public Node get(Node n) {
+		return list.get(list.indexOf(n));
 	}
 
 	/**
@@ -176,8 +165,9 @@ public class BinaryTree {
 	 * @param c
 	 *            the new value
 	 * @return
+	 * @throws NodeNotFoundException
 	 */
-	public char replace(Node p, char c) {
+	public char replace(Node p, char c) throws NodeNotFoundException {
 		Node aNode = null;
 		Node newNode = null;
 		char oldValue = 0;
@@ -191,8 +181,8 @@ public class BinaryTree {
 
 			aNode = null;
 			newNode = null;
-		}
-		// else throw exception?
+		} else
+			throw new NodeNotFoundException();
 
 		return oldValue;
 	}
@@ -227,10 +217,7 @@ public class BinaryTree {
 	 * @return true if the node has a left child; false otherwise
 	 */
 	public boolean hasLeft(Node p) {
-		if (p.getLeft() != null)
-			return true;
-		else
-			return false;
+		return (p.getLeft() != null);
 	}
 
 	/**
@@ -241,10 +228,7 @@ public class BinaryTree {
 	 * @return true if the node has a right child; false otherwise
 	 */
 	public boolean hasRight(Node p) {
-		if (p.getRight() != null)
-			return true;
-		else
-			return false;
+		return (p.getRight() != null);
 	}
 
 }
