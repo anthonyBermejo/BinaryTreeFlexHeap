@@ -161,7 +161,7 @@ public class BinaryTree {
 	/**
 	 * Returns the node within the binary tree of a given node
 	 * @param n Node to be found
-	 * @return Null if not found, Reference to the node if found
+	 * @return Null, if not found, Reference to the node if found
 	 */
 	public Node get(Node n)
 	{		
