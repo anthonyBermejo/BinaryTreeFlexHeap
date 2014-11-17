@@ -112,8 +112,12 @@ public class ArrayList {
 	 * 
 	 * @return size of array list
 	 */
-	public int size() {
+	public int getSize() {
 		return size;
+	}
+
+	public void setSize(int size) {
+		this.size = size;
 	}
 
 	/**
@@ -136,7 +140,9 @@ public class ArrayList {
 	public int indexOf(Node p) {
 		int index = -1;
 
-		for (int i = 0; i < size; i++) {
+		for (int i = 1; i <= size; i++) {
+			if (array[i] == null)
+				continue;
 			if (p.getKey() == array[i].getKey()
 					&& p.element() == array[i].element()) {
 				index = i;

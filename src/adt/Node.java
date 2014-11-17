@@ -109,7 +109,6 @@ public class Node implements Position {
 	 */
 	@Override
 	public String toString() {
-		return "Node [value=" + value + ", parent=" + parent + ", key=" + key
-				+ ", left=" + left + ", right=" + right + "]";
+		return "Node [value=" + value + ", key=" + key + "]";
 	}
 }
