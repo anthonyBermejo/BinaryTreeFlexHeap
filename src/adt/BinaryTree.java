@@ -30,6 +30,34 @@ public class BinaryTree {
 		return list.get(1);
 	}
 	
+	public void setRoot(Node p)
+	{
+		if (list.get(1) == null && p != null)
+			list.set(1, p);
+	}
+	
+	public void addLeft(Node parent, Node child)
+	{
+		int parentIndex = list.indexOf(parent);
+		
+		if (parentIndex != -1) {
+			parent.setLeft(child);
+			child.setParent(parent);
+			list.add(parentIndex * 2, child);
+		}
+	}
+	
+	public void addRight(Node parent, Node child)
+	{
+		int parentIndex = list.indexOf(parent);
+		
+		if (parentIndex != -1) {
+			parent.setRight(child);
+			child.setParent(parent);
+			list.add(parentIndex * 2 + 1, child);
+		}
+	}
+	
 	public Node parent(Node p)
 	{
 		Node aNode = null;

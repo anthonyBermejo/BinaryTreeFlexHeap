@@ -62,6 +62,11 @@ public class Node implements Position {
 		return right;
 	}
 	
+	public void setParent(Node parent)
+	{
+		this.parent = parent;
+	}
+	
 	public void setLeft(Node left)
 	{
 		this.left = left;
