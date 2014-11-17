@@ -21,6 +21,24 @@ public class ArrayList {
 	}
 
 	/**
+	 * Adds an element into the list at the given index
+	 * 
+	 * @param index
+	 *            the index where the new element is to be placed
+	 * @param value
+	 *            Element to be set
+	 */
+	public void add(int index, Node value) {
+
+		shiftArray(index, size + 1);
+
+		array[index] = value;
+
+		checkArraySize();
+		size++;
+	}
+
+	/**
 	 * Returns the element at the given index
 	 * 
 	 * @param index
@@ -53,38 +71,37 @@ public class ArrayList {
 	}
 
 	/**
-	 * Replaces the element at the given index with the value being sent in
+	 * Returns the index of a specific node in the array list. Returns -1 if not
+	 * found
 	 * 
-	 * @param index
-	 *            the index where the element is located in the array
-	 * @param value
-	 *            Element to be set
-	 * @return
+	 * @param p
+	 *            Node to be found in array list
+	 * @return Index of node, -1 if not found
 	 */
-	public Node set(int index, Node value) {
-		Node oldNode = array[index];
+	public int indexOf(Node p) {
+		int index = -1;
+		boolean found = false;
 
-		array[index] = value;
+		for (int i = 0; i <= size && !found; i++) {
+			if (array[i] == null)
+				continue;
+			if (p.getKey() == array[i].getKey()
+					&& p.element() == array[i].element()) {
+				index = i;
+				found = true;
+			}
+		}
 
-		return oldNode;
+		return index;
 	}
 
 	/**
-	 * Adds an element into the list at the given index
+	 * Determines if array list is empty
 	 * 
-	 * @param index
-	 *            the index where the new element is to be placed
-	 * @param value
-	 *            Element to be set
+	 * @return Returns true if the array list is empty, false if not
 	 */
-	public void add(int index, Node value) {
-
-		shiftArray(index, size + 1);
-
-		array[index] = value;
-
-		checkArraySize();
-		size++;
+	public boolean isEmpty() {
+		return (size == 0);
 	}
 
 	/**
@@ -108,45 +125,29 @@ public class ArrayList {
 	}
 
 	/**
+	 * Replaces the element at the given index with the value being sent in
+	 * 
+	 * @param index
+	 *            the index where the element is located in the array
+	 * @param value
+	 *            Element to be set
+	 * @return
+	 */
+	public Node set(int index, Node value) {
+		Node oldNode = array[index];
+
+		array[index] = value;
+
+		return oldNode;
+	}
+
+	/**
 	 * Return size of the array list
 	 * 
 	 * @return size of array list
 	 */
 	public int size() {
 		return size;
-	}
-
-	/**
-	 * Determines if array list is empty
-	 * 
-	 * @return Returns true if the array list is empty, false if not
-	 */
-	public boolean isEmpty() {
-		return (size == 0);
-	}
-
-	/**
-	 * Returns the index of a specific node in the array list. Returns -1 if not
-	 * found
-	 * 
-	 * @param p
-	 *            Node to be found in array list
-	 * @return Index of node, -1 if not found
-	 */
-	public int indexOf(Node p) {
-		int index = -1;
-
-		for (int i = 1; i <= size; i++) {
-			if (array[i] == null)
-				continue;
-			if (p.getKey() == array[i].getKey()
-					&& p.element() == array[i].element()) {
-				index = i;
-				break;
-			}
-		}
-
-		return index;
 	}
 
 	/**

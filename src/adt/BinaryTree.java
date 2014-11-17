@@ -21,52 +21,6 @@ public class BinaryTree {
 	}
 
 	/**
-	 * Returns the size of the BinaryTree.
-	 * 
-	 * @return size of the tree
-	 */
-	public int getSize() {
-		return list.getSize();
-	}
-
-	public void setSize(int size) {
-		list.setSize(size);
-	}
-
-	/**
-	 * Verifies whether the tree is empty.
-	 * 
-	 * @return true if the tree is empty; false otherwise
-	 */
-	public boolean isEmpty() {
-		return list.isEmpty();
-	}
-
-	/**
-	 * Returns the root of the tree.
-	 * 
-	 * @return root of the tree
-	 */
-	public Node root() {
-		return list.get(1);
-	}
-
-	/**
-	 * Sets the root of the tree.
-	 * 
-	 * @param p
-	 *            new root of the tree
-	 */
-	public void setRoot(Node n) {
-		if (n != null) {
-			if (list.get(1) == null)
-				list.setSize(getSize() + 1);
-			list.set(1, n);
-		}
-
-	}
-
-	/**
 	 * Adds a left child to the specified node.
 	 * 
 	 * @param parent
@@ -105,17 +59,107 @@ public class BinaryTree {
 	}
 
 	/**
+	 * Returns the node within the binary tree
+	 * 
+	 * @param n
+	 *            Node to be found
+	 * @return Null, if not found, Reference to the node if found
+	 */
+	public Node get(Node n) {
+		return list.get(n);
+	}
+
+	/**
+	 * Verifies whether the specified node has a left child.
+	 * 
+	 * @param n
+	 *            the node which will be verified
+	 * @return true if the node has a left child; false otherwise
+	 */
+	public boolean hasLeft(Node n) {
+		return (n.getLeft() != null);
+	}
+
+	/**
+	 * Verifies whether the specified node has a right child.
+	 * 
+	 * @param n
+	 *            the node which will be verified
+	 * @return true if the node has a right child; false otherwise
+	 */
+	public boolean hasRight(Node n) {
+		return (n.getRight() != null);
+	}
+
+	/**
+	 * Verifies whether the tree is empty.
+	 * 
+	 * @return true if the tree is empty; false otherwise
+	 */
+	public boolean isEmpty() {
+		return list.isEmpty();
+	}
+
+	/**
+	 * Verifies whether the specified node is external.
+	 * 
+	 * @param n
+	 *            the node which will be verified
+	 * @return true if the node is external; false otherwise
+	 */
+	public boolean isExternal(Node n) {
+		return (!hasLeft(n) && !hasRight(n));
+	}
+
+	/**
+	 * Verifies whether the specified node is internal.
+	 * 
+	 * @param n
+	 *            the node which will be verified
+	 * @return true if the node is internal; false otherwise
+	 */
+	public boolean isInternal(Node n) {
+		return (hasLeft(n) || hasRight(n));
+	}
+
+	/**
+	 * Verifies if the specified node is the root of the tree.
+	 * 
+	 * @param n
+	 *            the node which will be verified
+	 * @return true if the node is the root of the tree; false otherwise
+	 */
+	public boolean isRoot(Node n) {
+		Node root = list.get(1);
+
+		if (root != null)
+			return root.equals(n);
+		return false;
+	}
+
+	/**
+	 * Returns the left child of the specified node.
+	 * 
+	 * @param n
+	 *            the node for which the left child will be returned
+	 * @return left child of the node p.
+	 */
+	public Node left(Node n) {
+		return n.getLeft();
+	}
+
+	/**
 	 * Returns the parent of the specified node.
 	 * 
-	 * @param p
+	 * @param n
 	 *            the node for which a parent will be returned
 	 * @return parent of the node p
 	 * @throws NodeNotFoundException
 	 */
-	public Node parent(Node p) throws NodeNotFoundException {
+	public Node parent(Node n) throws NodeNotFoundException {
 		Node aNode = null;
 		Node parent = null;
-		int index = list.indexOf(p);
+		int index = list.indexOf(n);
 
 		if (index != -1) {
 			aNode = list.get(index);
@@ -127,59 +171,20 @@ public class BinaryTree {
 	}
 
 	/**
-	 * Verifies whether the specified node is external.
-	 * 
-	 * @param p
-	 *            the node which will be verified
-	 * @return true if the node is external; false otherwise
-	 */
-	public boolean isExternal(Node p) {
-		return (!hasLeft(p) && !hasRight(p));
-	}
-
-	/**
-	 * Verifies whether the specified node is internal.
-	 * 
-	 * @param p
-	 *            the node which will be verified
-	 * @return true if the node is internal; false otherwise
-	 */
-	public boolean isInternal(Node p) {
-		return (hasLeft(p) || hasRight(p));
-	}
-
-	/**
-	 * Verifies if the specified node is the root of the tree.
-	 * 
-	 * @param p
-	 *            the node which will be verified
-	 * @return true if the node is the root of the tree; false otherwise
-	 */
-	public boolean isRoot(Node p) {
-		Node root = list.get(1);
-
-		return (root != null);
-	}
-
-	public Node get(Node n) {
-		return list.get(n);
-	}
-
-	/**
 	 * Replaces the value of the specified node with a new one.
 	 * 
-	 * @param p
+	 * @param n
 	 *            the node whose value will be changed
 	 * @param c
 	 *            the new value
 	 * @return
 	 * @throws NodeNotFoundException
 	 */
-	public char replace(Node p, char c) throws NodeNotFoundException {
+	public char replace(Node n, char c) throws NodeNotFoundException {
 		Node aNode = null;
 		Node newNode = null;
 		char oldValue = 0;
-		int index = list.indexOf(p);
+		int index = list.indexOf(n);
 
 		if (index != -1) {
 			aNode = list.get(index);
@@ -196,47 +201,47 @@ public class BinaryTree {
 	}
 
 	/**
-	 * Returns the left child of the specified node.
-	 * 
-	 * @param p
-	 *            the node for which the left child will be returned
-	 * @return left child of the node p.
-	 */
-	public Node left(Node p) {
-		return p.getLeft();
-	}
-
-	/**
 	 * Returns the right child of the specified node.
 	 * 
-	 * @param p
+	 * @param n
 	 *            the node for which the right child will be returned
 	 * @return right child of the node p.
 	 */
-	public Node right(Node p) {
-		return p.getRight();
+	public Node right(Node n) {
+		return n.getRight();
 	}
 
 	/**
-	 * Verifies whether the specified node has a left child.
+	 * Returns the root of the tree.
 	 * 
-	 * @param p
-	 *            the node which will be verified
-	 * @return true if the node has a left child; false otherwise
+	 * @return root of the tree
 	 */
-	public boolean hasLeft(Node p) {
-		return (p.getLeft() != null);
+	public Node root() {
+		return list.get(1);
 	}
 
 	/**
-	 * Verifies whether the specified node has a right child.
+	 * Sets the root of the tree.
 	 * 
-	 * @param p
-	 *            the node which will be verified
-	 * @return true if the node has a right child; false otherwise
+	 * @param n
+	 *            new root of the tree
 	 */
-	public boolean hasRight(Node p) {
-		return (p.getRight() != null);
+	public void setRoot(Node n) {
+		if (n != null) {
+			if (list.get(1) == null)
+				list.add(1, n);
+			else
+				list.set(1, n);
+		}
+	}
+
+	/**
+	 * Returns the size of the BinaryTree.
+	 * 
+	 * @return size of the tree
+	 */
+	public int size() {
+		return list.size();
 	}
 
 	@Override
