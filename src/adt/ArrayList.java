@@ -59,14 +59,14 @@ public class ArrayList {
 	 */
 	public Node get(Node n) {
 		Node aNode = null;
-
-		for (int i = 0; i < array.length; i++) {
+		boolean found = false;
+		for (int i = 0; i < array.length && !found; i++) {
 			if (array[i] == null)
 				continue;
 			if (n.getKey() == array[i].getKey()
 					&& n.element() == array[i].element()) {
 				aNode = array[i];
-				break;
+				found = true;
 			}
 		}
 
