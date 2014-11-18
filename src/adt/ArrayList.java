@@ -30,12 +30,13 @@ public class ArrayList {
 	 */
 	public void add(int index, Node value) {
 
+		size++;
+		
+		checkArraySize(index);
+		
 		shiftArray(index, size + 1);
 
 		array[index] = value;
-
-		checkArraySize();
-		size++;
 	}
 
 	/**
@@ -50,7 +51,7 @@ public class ArrayList {
 	}
 
 	/**
-	 * Returns the node within the array list -- the fuck? ---> of a given node
+	 * Returns the node within the array list that equals the given node
 	 * 
 	 * @param n
 	 *            Node to be found
@@ -82,7 +83,7 @@ public class ArrayList {
 		int index = -1;
 		boolean found = false;
 
-		for (int i = 0; i <= size && !found; i++) {
+		for (int i = 0; i <= array.length && !found; i++) {
 			if (array[i] == null)
 				continue;
 			if (p.getKey() == array[i].getKey()
@@ -115,7 +116,9 @@ public class ArrayList {
 		Node removed = array[index];
 
 		// shift all elements to the left
-		for (int i = index; i < size - 1; i++) {
+		for (int i = index; i < array.length; i++) {
+			if (array[i] == null)
+				continue;
 			array[i] = array[i + 1];
 		}
 
@@ -162,8 +165,8 @@ public class ArrayList {
 	/*
 	 * Verifies if the size of the list is at 80% capacity
 	 */
-	private void checkArraySize() {
-		if (((float) size / array.length) >= 0.8)
+	private void checkArraySize(int index) {
+		if (index >= array.length || ((float) size / array.length) >= 0.8)
 			expandArray();
 	}
 

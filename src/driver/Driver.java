@@ -23,6 +23,23 @@ public class Driver {
 
 		tree.addRight(tree.root(), new Node(12, null, 'd'));
 		System.out.println(tree);
+		
+		tree.addRight(tree.root().getRight(), new Node(2, null, 'a'));
+		System.out.println(tree);
+		
+		tree.addRight(tree.root().getRight().getRight(), new Node(1, null, 'b'));
+		System.out.println(tree);
+		
+		try {
+		tree.replace(new Node (1, null, 'b'), 'd');
+		}catch (Exception e)
+		{
+			System.out.println("stupid");
+		}	
+		System.out.println(tree);
+		
+		
+		
 	}
 
 }
