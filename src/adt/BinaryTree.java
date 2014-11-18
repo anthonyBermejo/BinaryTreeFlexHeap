@@ -169,18 +169,6 @@ public class BinaryTree {
 
 		return parent;
 	}
-	
-	/**
-	 * Removes the Node at the same position as the given Node
-	 * @param n Node to be removed
-	 * @return Removed Node
-	 */
-	public Node remove(Node n)
-	{
-		
-		
-		return null;
-	}
 
 	/**
 	 * Replaces the value of the specified node with a new one.

@@ -30,16 +30,23 @@ public class Driver {
 		tree.addRight(tree.root().getRight().getRight(), new Node(1, null, 'b'));
 		System.out.println(tree);
 		
-		try {
-		tree.replace(new Node (1, null, 'b'), 'd');
-		}catch (Exception e)
-		{
-			System.out.println("stupid");
-		}	
-		System.out.println(tree);
+		//try {
+		//tree.replace(new Node (1, null, 'b'), 'd');
+		//}catch (Exception e)
+		//{
+		//	System.out.println("stupid");
+		//}	
+		//System.out.println(tree);
 		
+		//System.out.println(tree.hasRight(tree.root()));
+		//System.out.println(tree.hasLeft(tree.root()));
+		//System.out.println(tree.hasLeft(tree.root().getLeft().getLeft()));
+		//System.out.println(tree.hasRight(tree.root().getLeft().getLeft()));
 		
+		//System.out.println(tree.hasRight(tree.root().getRight()));
+		//System.out.println(tree.hasLeft(tree.root().getRight()));
 		
+		System.out.println(tree.isRoot(tree.get(new Node(12, null, 'd'))));
 	}
 
 }
