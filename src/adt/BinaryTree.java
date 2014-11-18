@@ -144,8 +144,19 @@ public class BinaryTree {
 	 *            the node for which the left child will be returned
 	 * @return left child of the node p.
 	 */
-	public Node left(Node n) {
-		return n.getLeft();
+	public Node left(Node n) throws NodeNotFoundException {
+		
+		Node aNode = null;
+		Node left = null;
+		int index = list.indexOf(n);
+
+		if (index != -1) {
+			aNode = list.get(index);
+			left = aNode.getLeft();
+		} else
+			throw new NodeNotFoundException();
+
+		return left;
 	}
 
 	/**
@@ -207,8 +218,18 @@ public class BinaryTree {
 	 *            the node for which the right child will be returned
 	 * @return right child of the node p.
 	 */
-	public Node right(Node n) {
-		return n.getRight();
+	public Node right(Node n) throws NodeNotFoundException {
+		Node aNode = null;
+		Node right = null;
+		int index = list.indexOf(n);
+
+		if (index != -1) {
+			aNode = list.get(index);
+			right = aNode.getRight();
+		} else
+			throw new NodeNotFoundException();
+
+		return right;
 	}
 
 	/**
