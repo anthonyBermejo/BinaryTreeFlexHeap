@@ -17,6 +17,7 @@ public class FlexHeap {
 	// member variable declarations
 	private BinaryTree tree;
 	private HeapType heapType;
+	private Node lastNode;
 
 	/**
 	 * Default constructor
@@ -24,6 +25,42 @@ public class FlexHeap {
 	public FlexHeap() {
 		tree = new BinaryTree();
 		heapType = HeapType.MIN_HEAP;
+	}
+
+	// public methods
+
+	/**
+	 * Inserts a Node in the heap and sorts the heap accordingly.
+	 * 
+	 * @param n
+	 *            the new Node to be inserted
+	 */
+	public void insert(Node n) {
+		if (n != null) {
+			if (tree.size() == 0) {
+				tree.setRoot(n);
+				lastNode = tree.root();
+			} else {
+				if (!tree.isRoot(lastNode)) {
+					if (lastNode.getParent().getLeft().equals(lastNode))
+						tree.addRight(lastNode.getParent(), n);
+					else {
+						Node node = findLeftChild(lastNode);
+						Node temp = node;
+						if (temp.getLeft() != null) {
+							while (temp.getLeft() != null)
+								temp = temp.getLeft();
+							tree.addLeft(temp, n);
+						} else {
+							tree.addRight(temp.getParent(), n);
+						}
+
+					}
+				} else
+					tree.addLeft(lastNode, n);
+				lastNode = n;
+			}
+		}
 	}
 
 	/**
@@ -58,5 +95,25 @@ public class FlexHeap {
 			switchMaxHeap();
 		else
 			switchMinHeap();
+	}
+
+	/**
+	 * Overriden toString() method.
+	 */
+	@Override
+	public String toString() {
+		return "FlexHeap [tree=" + tree + ", heapType=" + heapType
+				+ ", lastNode=" + lastNode + "]";
+	}
+
+	// private methods
+
+	private Node findLeftChild(Node n) {
+		if (n.getParent().equals(tree.root()))
+			return n.getParent();
+		if (n.getParent().getParent().getRight()
+				.equals(n.getParent().getLeft()))
+			return n;
+		return findLeftChild(n.getParent());
 	}
 }

@@ -29,13 +29,8 @@ public class ArrayList {
 	 *            Element to be set
 	 */
 	public void add(int index, Node value) {
-
-		size++;
-		
-		checkArraySize(index);
-		
-		shiftArray(index, size + 1);
-
+		size++;		
+		checkArraySize(index);		
 		array[index] = value;
 	}
 
@@ -184,15 +179,15 @@ public class ArrayList {
 	/*
 	 * Shifts the elements in the array to the right from a starting index
 	 */
-	private void shiftArray(int startingPosition, int endPosition) {
-		Node temp1 = null;
-		Node temp2 = null;
-
-		// swap elements in the array
-		for (int i = startingPosition; i < endPosition; i++) {
-			temp1 = array[i];
-			array[i] = temp2;
-			temp2 = temp1;
-		}
-	}
+//	private void shiftArray(int startingPosition, int endPosition) {
+//		Node temp1 = null;
+//		Node temp2 = null;
+//
+//		// swap elements in the array
+//		for (int i = startingPosition; i < endPosition; i++) {
+//			temp1 = array[i];
+//			array[i] = temp2;
+//			temp2 = temp1;
+//		}
+//	}
 }

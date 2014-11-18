@@ -145,7 +145,7 @@ public class BinaryTree {
 	 * @return left child of the node p.
 	 */
 	public Node left(Node n) throws NodeNotFoundException {
-		
+
 		Node aNode = null;
 		Node left = null;
 		int index = list.indexOf(n);
@@ -239,6 +239,8 @@ public class BinaryTree {
 	 */
 	public Node root() {
 		return list.get(1);
+		// TODO:
+		// deep copy for all returns
 	}
 
 	/**
