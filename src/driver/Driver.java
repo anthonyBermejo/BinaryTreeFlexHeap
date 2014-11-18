@@ -101,7 +101,7 @@ public class Driver {
 		System.out.println(flexHeap);
 
 		flexHeap.insert(new Node(30, null, 'a'));
-		System.out.println(flexHeap);
+		System.out.println(flexHeap); 
 
 	}
 

@@ -61,7 +61,7 @@ public class ArrayList {
 			if (n.getKey() == array[i].getKey()
 					&& n.element() == array[i].element()) {
 				aNode = array[i];
-				found = true;
+				found = true; 
 			}
 		}
 

@@ -58,7 +58,7 @@ public class FlexHeap {
 					}
 				} else
 					tree.addLeft(lastNode, n);
-				lastNode = n;
+				lastNode = n; 
 			}
 		}
 	}

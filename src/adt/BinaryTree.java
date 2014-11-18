@@ -254,7 +254,7 @@ public class BinaryTree {
 			if (list.get(1) == null)
 				list.add(1, n);
 			else
-				list.set(1, n);
+				list.set(1, n); 
 		}
 	}
 
