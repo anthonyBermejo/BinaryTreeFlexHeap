@@ -239,8 +239,6 @@ public class BinaryTree {
 	 */
 	public Node root() {
 		return list.get(1);
-		// TODO:
-		// deep copy for all returns
 	}
 
 	/**
