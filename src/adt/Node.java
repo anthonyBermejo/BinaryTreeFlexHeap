@@ -134,6 +134,16 @@ public class Node implements Position {
 	}
 
 	/**
+	 * Sets the value of the current Node.
+	 * 
+	 * @param value
+	 *            new value
+	 */
+	public void setValue(char value) {
+		this.value = value;
+	}
+
+	/**
 	 * Overriden toString() method
 	 */
 	@Override
