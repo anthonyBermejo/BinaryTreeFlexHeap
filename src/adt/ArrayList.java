@@ -29,9 +29,10 @@ public class ArrayList {
 	 *            Element to be set
 	 */
 	public void add(int index, Node value) {
-		size++;		
-		checkArraySize(index);		
-		array[index] = value;
+		size++;
+		checkArraySize(index);
+		if (value != null)
+			array[index] = value;
 	}
 
 	/**
@@ -54,14 +55,18 @@ public class ArrayList {
 	 */
 	public Node get(Node n) {
 		Node aNode = null;
-		boolean found = false;
-		for (int i = 0; i < array.length && !found; i++) {
-			if (array[i] == null)
-				continue;
-			if (n.getKey() == array[i].getKey()
-					&& n.element() == array[i].element()) {
-				aNode = array[i];
-				found = true; 
+		
+		if (n != null) {
+			boolean found = false;
+			for (int i = 0; i < array.length && !found; i++) {
+				if (array[i] == null)
+					continue;
+				if (n.getKey() == array[i].getKey()
+						&& n.element() == array[i].element()) {
+					aNode = new Node(array[i].getKey(), array[i].getParent(),
+							array[i].element());
+					found = true;
+				}
 			}
 		}
 
@@ -78,15 +83,18 @@ public class ArrayList {
 	 */
 	public int indexOf(Node p) {
 		int index = -1;
-		boolean found = false;
 
-		for (int i = 0; i <= array.length && !found; i++) {
-			if (array[i] == null)
-				continue;
-			if (p.getKey() == array[i].getKey()
-					&& p.element() == array[i].element()) {
-				index = i;
-				found = true;
+		if (p != null) {
+			boolean found = false;
+
+			for (int i = 0; i <= array.length && !found; i++) {
+				if (array[i] == null)
+					continue;
+				if (p.getKey() == array[i].getKey()
+						&& p.element() == array[i].element()) {
+					index = i;
+					found = true;
+				}
 			}
 		}
 
@@ -110,7 +118,15 @@ public class ArrayList {
 	 * @return element that was removed from the array
 	 */
 	public Node remove(int index) {
-		Node removed = array[index];
+
+		// SHOULD WE HAVE A REMOVE THEN?
+
+		Node removed = null;
+
+		if (index >= array.length)
+			throw new IndexOutOfBoundsException();
+		new Node(array[index].getKey(), array[index].getParent(),
+				array[index].element());
 
 		// shift all elements to the left
 		for (int i = index; i < array.length; i++) {
@@ -134,8 +150,15 @@ public class ArrayList {
 	 * @return
 	 */
 	public Node set(int index, Node value) {
-		Node oldNode = array[index];
-		array[index] = value;
+		Node oldNode = null;
+		if (index >= array.length)
+			throw new IndexOutOfBoundsException();
+
+		if (value != null && array[index] != null) {
+			oldNode = new Node(array[index].getKey(), array[index].getParent(),
+					array[index].element());
+			array[index] = value;
+		}
 		return oldNode;
 	}
 
@@ -175,19 +198,4 @@ public class ArrayList {
 		array = newArray;
 		newArray = null;
 	}
-
-	/*
-	 * Shifts the elements in the array to the right from a starting index
-	 */
-//	private void shiftArray(int startingPosition, int endPosition) {
-//		Node temp1 = null;
-//		Node temp2 = null;
-//
-//		// swap elements in the array
-//		for (int i = startingPosition; i < endPosition; i++) {
-//			temp1 = array[i];
-//			array[i] = temp2;
-//			temp2 = temp1;
-//		}
-//	}
 }
