@@ -73,6 +73,18 @@ public class ArrayList {
 		return aNode;
 	}
 
+	public Node getLast() {
+		Node aNode = null;
+
+		for (int i = array.length - 1; i >= 1; i--) {
+			if (array[i] != null) {
+				return array[i];
+			}
+		}
+
+		return aNode;
+	}
+
 	/**
 	 * Returns the index of a specific node in the array list. Returns -1 if not
 	 * found
@@ -88,6 +100,34 @@ public class ArrayList {
 			boolean found = false;
 
 			for (int i = 0; i <= array.length && !found; i++) {
+				if (array[i] == null)
+					continue;
+				if (p.getKey() == array[i].getKey()
+						&& p.element() == array[i].element()) {
+					index = i;
+					found = true;
+				}
+			}
+		}
+
+		return index;
+	}
+
+	/**
+	 * Returns the last index of a specific node in the array list. Returns -1
+	 * if not found
+	 * 
+	 * @param p
+	 *            Node to be found in array list
+	 * @return Index of node, -1 if not found
+	 */
+	public int lastIndexOf(Node p) {
+		int index = -1;
+
+		if (p != null) {
+			boolean found = false;
+
+			for (int i = array.length - 1; i >= 1 && !found; i--) {
 				if (array[i] == null)
 					continue;
 				if (p.getKey() == array[i].getKey()
@@ -130,6 +170,13 @@ public class ArrayList {
 			array[index] = value;
 		}
 		return oldNode;
+	}
+
+	public void set(Node node1, Node node2, boolean firstIndex) {
+		if (firstIndex)
+			array[indexOf(node1)] = node2;
+		else 
+			array[lastIndexOf(node1)] = node2;
 	}
 
 	/**

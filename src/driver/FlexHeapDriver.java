@@ -18,31 +18,22 @@ public class FlexHeapDriver {
 		flexHeap.insert(new Node(10, null, 't'));
 		System.out.println(flexHeap);
 
-		flexHeap.insert(new Node(14, null, 'D'));
-		System.out.println(flexHeap);
-
-		flexHeap.insert(new Node(14, null, 'x'));
-		System.out.println(flexHeap);
-
 		flexHeap.insert(new Node(21, null, 'm'));
+		System.out.println(flexHeap);
+		
+		flexHeap.insert(new Node(1, null, 'A'));
 		System.out.println(flexHeap);
 
 		flexHeap.insert(new Node(25, null, 'n'));
-		System.out.println(flexHeap);
-
-		flexHeap.insert(new Node(27, null, 'o'));
-		System.out.println(flexHeap);
-
-		flexHeap.insert(new Node(28, null, 'c'));
-		System.out.println(flexHeap);
-
-		flexHeap.insert(new Node(30, null, 'a'));
 		System.out.println(flexHeap);
 
 		flexHeap.insert(new Node(31, null, 'b'));
 		System.out.println(flexHeap);
 
 		flexHeap.insert(new Node(2, null, 'A'));
+		System.out.println(flexHeap);
+		
+		flexHeap.remove();
 		System.out.println(flexHeap);
 	}
 

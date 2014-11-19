@@ -69,6 +69,10 @@ public class BinaryTree {
 		return list.get(n);
 	}
 
+	public Node getLast() {
+		return list.getLast();
+	}
+	
 	/**
 	 * Verifies whether the specified node has a left child.
 	 * 
@@ -239,6 +243,10 @@ public class BinaryTree {
 	 */
 	public Node root() {
 		return list.get(1);
+	}
+	
+	public void set(Node node1, Node node2, boolean firstIndex) {
+		list.set(node1, node2, firstIndex);
 	}
 
 	/**
