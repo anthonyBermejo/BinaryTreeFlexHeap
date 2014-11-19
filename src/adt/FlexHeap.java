@@ -39,27 +39,42 @@ public class FlexHeap {
 		if (n != null) {
 			if (tree.size() == 0) {
 				tree.setRoot(n);
-				lastNode = tree.root();
 			} else {
 				if (!tree.isRoot(lastNode)) {
+					// lastNode is a leftChild
 					if (lastNode.getParent().getLeft().equals(lastNode))
 						tree.addRight(lastNode.getParent(), n);
 					else {
-						Node node = findLeftChild(lastNode);
-						Node temp = node;
-						if (temp.getLeft() != null) {
+						// calculate depth of tree
+						int depth = (int) Math.floor(Math.log(tree.size())
+								/ Math.log(2));
+
+						// check if current level is complete with # of nodes
+						if (tree.size() < Math.pow(2, depth + 1) - 1) {
+							// level is not complete
+							Node node = findLeftChildParent(lastNode
+									.getParent());
+							Node temp = node.getParent().getRight();
+
 							while (temp.getLeft() != null)
 								temp = temp.getLeft();
-							tree.addLeft(temp, n);
-						} else {
-							tree.addRight(temp.getParent(), n);
-						}
 
+							tree.addLeft(temp, n);
+						}
+						else {
+							// level is complete, start at root and go left until find null
+							Node temp = tree.root();
+							while (temp.getLeft() != null)
+								temp = temp.getLeft();
+
+							tree.addLeft(temp, n);
+						}
+							
 					}
 				} else
 					tree.addLeft(lastNode, n);
-				lastNode = n; 
 			}
+			lastNode = n;
 		}
 	}
 
@@ -108,12 +123,11 @@ public class FlexHeap {
 
 	// private methods
 
-	private Node findLeftChild(Node n) {
-		if (n.getParent().equals(tree.root()))
-			return n.getParent();
-		if (n.getParent().getParent().getRight()
-				.equals(n.getParent().getLeft()))
+	private Node findLeftChildParent(Node n) {
+		if (n.equals(tree.root()))
 			return n;
-		return findLeftChild(n.getParent());
+		if (n.equals(n.getParent().getLeft()))
+			return n;
+		return findLeftChildParent(n.getParent());
 	}
 }
