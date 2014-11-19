@@ -9,7 +9,7 @@ public class FlexHeapDriver {
 
 		FlexHeap flexHeap = new FlexHeap();
 
-		flexHeap.insert(new Node(12, null, 'd'));
+		flexHeap.insert(new Node(19, null, 'd'));
 		System.out.println(flexHeap);
 
 		flexHeap.insert(new Node(14, null, 's'));
@@ -40,6 +40,9 @@ public class FlexHeapDriver {
 		System.out.println(flexHeap);
 
 		flexHeap.insert(new Node(31, null, 'b'));
+		System.out.println(flexHeap);
+
+		flexHeap.insert(new Node(2, null, 'A'));
 		System.out.println(flexHeap);
 	}
 

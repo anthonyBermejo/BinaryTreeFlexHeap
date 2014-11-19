@@ -60,21 +60,41 @@ public class FlexHeap {
 								temp = temp.getLeft();
 
 							tree.addLeft(temp, n);
-						}
-						else {
-							// level is complete, start at root and go left until find null
+						} else {
+							// level is complete, start at root and go left
+							// until find null
 							Node temp = tree.root();
 							while (temp.getLeft() != null)
 								temp = temp.getLeft();
 
 							tree.addLeft(temp, n);
 						}
-							
+
 					}
 				} else
 					tree.addLeft(lastNode, n);
 			}
 			lastNode = n;
+
+			// repair the heap based on its type
+			if (heapType == HeapType.MIN_HEAP) {
+				int tempKey;
+				char tempValue;
+				while (lastNode.getParent() != null
+						&& lastNode.getKey() < lastNode.getParent().getKey()) {
+					tempKey = lastNode.getParent().getKey();
+					tempValue = lastNode.getParent().element();
+					lastNode.getParent().setKey(lastNode.getKey());
+					lastNode.getParent().setValue(lastNode.element());
+					lastNode.setKey(tempKey);
+					lastNode.setValue(tempValue);
+					lastNode = n;
+				}
+				lastNode = n;
+			} else {
+
+			}
+
 		}
 	}
 
