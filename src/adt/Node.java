@@ -94,6 +94,16 @@ public class Node implements Position {
 	}
 
 	/**
+	 * Sets the key of the current Node.
+	 * 
+	 * @param key
+	 *            the new key of the node
+	 */
+	public void setKey(int key) {
+		this.key = key;
+	}
+
+	/**
 	 * Sets the parent of the current Node.
 	 * 
 	 * @param parent
