@@ -55,7 +55,7 @@ public class ArrayList {
 	 */
 	public Node get(Node n) {
 		Node aNode = null;
-		
+
 		if (n != null) {
 			boolean found = false;
 			for (int i = 0; i < array.length && !found; i++) {
@@ -108,36 +108,6 @@ public class ArrayList {
 	 */
 	public boolean isEmpty() {
 		return (size == 0);
-	}
-
-	/**
-	 * Removes the element at the specified index
-	 * 
-	 * @param index
-	 *            the index where the element is located
-	 * @return element that was removed from the array
-	 */
-	public Node remove(int index) {
-
-		// SHOULD WE HAVE A REMOVE THEN?
-
-		Node removed = null;
-
-		if (index >= array.length)
-			throw new IndexOutOfBoundsException();
-		new Node(array[index].getKey(), array[index].getParent(),
-				array[index].element());
-
-		// shift all elements to the left
-		for (int i = index; i < array.length; i++) {
-			if (array[i] == null)
-				continue;
-			array[i] = array[i + 1];
-		}
-
-		array[size] = null;
-		size--;
-		return removed;
 	}
 
 	/**
