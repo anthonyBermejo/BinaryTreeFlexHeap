@@ -245,8 +245,8 @@ public class BinaryTree {
 		return list.get(1);
 	}
 	
-	public void set(Node node1, Node node2, boolean firstIndex) {
-		list.set(node1, node2, firstIndex);
+	public void set(Node node1, Node node2, boolean findFirstIndex) {
+		list.set(node1, node2, findFirstIndex);
 	}
 
 	/**

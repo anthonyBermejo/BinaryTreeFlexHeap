@@ -132,7 +132,57 @@ public class FlexHeap {
 	}
 	
 	private Node removeMax() {
-		return null;
+		char oldRootValue = tree.root().element();
+		int oldRootKey = tree.root().getKey();
+		int tempKey;
+		char tempValue;
+
+		tree.root().setKey(lastNode.getKey());
+		tree.root().setValue(lastNode.element());
+		
+		Node traverseNode = tree.root();
+		
+		// set lastNode to null
+		Node node = tree.getLast();
+		tree.set(node, null, false);
+
+		while (traverseNode.getLeft() != null
+				&& traverseNode.getRight() != null) {
+
+			if (traverseNode.getLeft().getKey() > traverseNode.getRight()
+					.getKey()) {
+				if (traverseNode.getLeft().getKey() > traverseNode.getKey()) {
+					tempKey = traverseNode.getKey();
+					tempValue = traverseNode.element();
+					traverseNode.setKey(traverseNode.getLeft().getKey());
+					traverseNode.setValue(traverseNode.getLeft().element());
+					traverseNode.getLeft().setKey(tempKey);
+					traverseNode.getLeft().setValue(tempValue);
+
+					traverseNode = traverseNode.getLeft();
+				} else
+					break;
+			} else {
+				if (traverseNode.getRight().getKey() > traverseNode.getKey()) {
+					tempKey = traverseNode.getKey();
+					tempValue = traverseNode.element();
+					traverseNode.setKey(traverseNode.getRight().getKey());
+					traverseNode.setValue(traverseNode.getRight().element());
+					traverseNode.getRight().setKey(tempKey);
+					traverseNode.getRight().setValue(tempValue);
+
+					traverseNode = traverseNode.getRight();
+				} else
+					break;
+			}
+			
+
+		}
+	
+		// set 2nd to lastNode to lastNode
+		lastNode = tree.getLast();
+		
+		return new Node(oldRootKey, null, oldRootValue);
 	}
 
 	/**
@@ -142,16 +192,14 @@ public class FlexHeap {
 	 * @return the removed element
 	 */
 	private Node removeMin() {
-		 char oldRootValue = tree.root().element();
-		 int oldRootKey = tree.root().getKey();
+		char oldRootValue = tree.root().element();
+		int oldRootKey = tree.root().getKey();
 		int tempKey;
 		char tempValue;
 
 		tree.root().setKey(lastNode.getKey());
 		tree.root().setValue(lastNode.element());
 		
-
-
 		Node traverseNode = tree.root();
 		
 		// set lastNode to null
@@ -190,9 +238,7 @@ public class FlexHeap {
 			
 
 		}
-		
-
-		
+	
 		// set 2nd to lastNode to lastNode
 		lastNode = tree.getLast();
 		

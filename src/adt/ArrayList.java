@@ -172,8 +172,8 @@ public class ArrayList {
 		return oldNode;
 	}
 
-	public void set(Node node1, Node node2, boolean firstIndex) {
-		if (firstIndex)
+	public void set(Node node1, Node node2, boolean findFirstIndex) {
+		if (findFirstIndex)
 			array[indexOf(node1)] = node2;
 		else 
 			array[lastIndexOf(node1)] = node2;
