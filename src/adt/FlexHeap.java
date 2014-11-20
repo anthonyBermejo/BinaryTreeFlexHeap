@@ -76,61 +76,36 @@ public class FlexHeap {
 			}
 			lastNode = n;
 
-			int tempKey;
-			char tempValue;
-			Node traversePosition = null;
+			Node traversePosition = lastNode;
 
 			// repair the heap based on its type
 			if (heapType == HeapType.MIN_HEAP) {
-
-				traversePosition = lastNode;
-
 				while (traversePosition.getParent() != null
 						&& traversePosition.getKey() < traversePosition
 								.getParent().getKey()) {
-					Node temp = traversePosition.getParent();
-
-					tempKey = temp.getKey();
-					tempValue = temp.element();
-					temp.setKey(traversePosition.getKey());
-					temp.setValue(traversePosition.element());
-					traversePosition.setKey(tempKey);
-					traversePosition.setValue(tempValue);
-
-					traversePosition = traversePosition.getParent();
+					traversePosition = swapValues(traversePosition);
 				}
 			} else {
-				traversePosition = lastNode;
-
 				while (traversePosition.getParent() != null
 						&& traversePosition.getKey() > traversePosition
 								.getParent().getKey()) {
-					Node temp = traversePosition.getParent();
-
-					tempKey = temp.getKey();
-					tempValue = temp.element();
-					temp.setKey(traversePosition.getKey());
-					temp.setValue(traversePosition.element());
-					traversePosition.setKey(tempKey);
-					traversePosition.setValue(tempValue);
-
-					traversePosition = traversePosition.getParent();
+					traversePosition = swapValues(traversePosition);
 				}
 			}
 		}
 	}
-	
+
 	public Node remove() {
 		Node removed = null;
-		
+
 		if (heapType == HeapType.MIN_HEAP)
 			removed = removeMin();
 		else
 			removed = removeMax();
-		
+
 		return removed;
 	}
-	
+
 	private Node removeMax() {
 		char oldRootValue = tree.root().element();
 		int oldRootKey = tree.root().getKey();
@@ -139,9 +114,9 @@ public class FlexHeap {
 
 		tree.root().setKey(lastNode.getKey());
 		tree.root().setValue(lastNode.element());
-		
+
 		Node traverseNode = tree.root();
-		
+
 		// set lastNode to null
 		Node node = tree.getLast();
 		tree.set(node, null, false);
@@ -175,13 +150,12 @@ public class FlexHeap {
 				} else
 					break;
 			}
-			
 
 		}
-	
+
 		// set 2nd to lastNode to lastNode
 		lastNode = tree.getLast();
-		
+
 		return new Node(oldRootKey, null, oldRootValue);
 	}
 
@@ -199,9 +173,9 @@ public class FlexHeap {
 
 		tree.root().setKey(lastNode.getKey());
 		tree.root().setValue(lastNode.element());
-		
+
 		Node traverseNode = tree.root();
-		
+
 		// set lastNode to null
 		Node node = tree.getLast();
 		tree.set(node, null, false);
@@ -235,13 +209,12 @@ public class FlexHeap {
 				} else
 					break;
 			}
-			
 
 		}
-	
+
 		// set 2nd to lastNode to lastNode
 		lastNode = tree.getLast();
-		
+
 		return new Node(oldRootKey, null, oldRootValue);
 	}
 
@@ -286,5 +259,26 @@ public class FlexHeap {
 		if (n.equals(n.getParent().getLeft()))
 			return n;
 		return findLeftChildParent(n.getParent());
+	}
+
+	/*
+	 * Swaps the values of the specified node with its parent.
+	 */
+	private Node swapValues(Node traversePosition) {
+		int tempKey;
+		char tempValue;
+
+		Node temp = traversePosition.getParent();
+
+		tempKey = temp.getKey();
+		tempValue = temp.element();
+		temp.setKey(traversePosition.getKey());
+		temp.setValue(traversePosition.element());
+		traversePosition.setKey(tempKey);
+		traversePosition.setValue(tempValue);
+
+		traversePosition = traversePosition.getParent();
+
+		return traversePosition;
 	}
 }
