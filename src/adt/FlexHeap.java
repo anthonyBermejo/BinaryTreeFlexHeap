@@ -109,7 +109,6 @@ public class FlexHeap {
 		else
 			removed = removeMax();
 
-		tree.remove();
 		return removed;
 	}
 
@@ -119,49 +118,63 @@ public class FlexHeap {
 		int tempKey;
 		char tempValue;
 
-		tree.root().setKey(lastNode.getKey());
-		tree.root().setValue(lastNode.element());
+		if (tree.size() > 1) {
+			
+			tree.root().setKey(lastNode.getKey());
+			tree.root().setValue(lastNode.element());
 
-		Node traverseNode = tree.root();
+			Node traverseNode = tree.root();
 
-		// set lastNode to null
-		Node node = tree.getLast();
-		tree.set(node, null, false);
+			// set lastNode to null
+			Node node = tree.getLast();
+			
+			// set the child of its parents to null
+			if (node.getParent().getLeft().equals(node))
+				node.getParent().setLeft(null);
+			else
+				node.getParent().setRight(null);
+			
+			// set null within array
+			tree.set(node, null, false);
+			tree.remove();
+			
+			while (traverseNode.getLeft() != null
+					&& traverseNode.getRight() != null) {
 
-		while (traverseNode.getLeft() != null
-				&& traverseNode.getRight() != null) {
+				if (traverseNode.getLeft().getKey() > traverseNode.getRight()
+						.getKey()) {
+					if (traverseNode.getLeft().getKey() > traverseNode.getKey()) {
+						tempKey = traverseNode.getKey();
+						tempValue = traverseNode.element();
+						traverseNode.setKey(traverseNode.getLeft().getKey());
+						traverseNode.setValue(traverseNode.getLeft().element());
+						traverseNode.getLeft().setKey(tempKey);
+						traverseNode.getLeft().setValue(tempValue);
 
-			if (traverseNode.getLeft().getKey() > traverseNode.getRight()
-					.getKey()) {
-				if (traverseNode.getLeft().getKey() > traverseNode.getKey()) {
-					tempKey = traverseNode.getKey();
-					tempValue = traverseNode.element();
-					traverseNode.setKey(traverseNode.getLeft().getKey());
-					traverseNode.setValue(traverseNode.getLeft().element());
-					traverseNode.getLeft().setKey(tempKey);
-					traverseNode.getLeft().setValue(tempValue);
+						traverseNode = traverseNode.getLeft();
+					} else
+						break;
+				} else {
+					if (traverseNode.getRight().getKey() > traverseNode
+							.getKey()) {
+						tempKey = traverseNode.getKey();
+						tempValue = traverseNode.element();
+						traverseNode.setKey(traverseNode.getRight().getKey());
+						traverseNode
+								.setValue(traverseNode.getRight().element());
+						traverseNode.getRight().setKey(tempKey);
+						traverseNode.getRight().setValue(tempValue);
 
-					traverseNode = traverseNode.getLeft();
-				} else
-					break;
-			} else {
-				if (traverseNode.getRight().getKey() > traverseNode.getKey()) {
-					tempKey = traverseNode.getKey();
-					tempValue = traverseNode.element();
-					traverseNode.setKey(traverseNode.getRight().getKey());
-					traverseNode.setValue(traverseNode.getRight().element());
-					traverseNode.getRight().setKey(tempKey);
-					traverseNode.getRight().setValue(tempValue);
+						traverseNode = traverseNode.getRight();
+					} else
+						break;
+				}
 
-					traverseNode = traverseNode.getRight();
-				} else
-					break;
 			}
 
+			// set 2nd to lastNode to lastNode
+			lastNode = tree.getLast();
 		}
-
-		// set 2nd to lastNode to lastNode
-		lastNode = tree.getLast();
 
 		return new Node(oldRootKey, null, oldRootValue);
 	}
@@ -178,49 +191,61 @@ public class FlexHeap {
 		int tempKey;
 		char tempValue;
 
-		tree.root().setKey(lastNode.getKey());
-		tree.root().setValue(lastNode.element());
+		if (tree.size() > 1) {
+			
+			tree.root().setKey(lastNode.getKey());
+			tree.root().setValue(lastNode.element());
 
-		Node traverseNode = tree.root();
+			Node traverseNode = tree.root();
 
-		// set lastNode to null
-		Node node = tree.getLast();
-		tree.set(node, null, false);
+			// set lastNode to null
+			Node node = tree.getLast();
+			
+			// set the child of its parents to null
+			if (node.getParent().getLeft().equals(node))
+				node.getParent().setLeft(null);
+			else
+				node.getParent().setRight(null);
+			
+			// set null within array
+			tree.set(node, null, false);
+			tree.remove();
+			
+			while (traverseNode.getLeft() != null
+					&& traverseNode.getRight() != null) {
 
-		while (traverseNode.getLeft() != null
-				&& traverseNode.getRight() != null) {
+				if (traverseNode.getLeft().getKey() < traverseNode.getRight()
+						.getKey()) {
+					if (traverseNode.getLeft().getKey() < traverseNode.getKey()) {
+						tempKey = traverseNode.getKey();
+						tempValue = traverseNode.element();
+						traverseNode.setKey(traverseNode.getLeft().getKey());
+						traverseNode.setValue(traverseNode.getLeft().element());
+						traverseNode.getLeft().setKey(tempKey);
+						traverseNode.getLeft().setValue(tempValue);
 
-			if (traverseNode.getLeft().getKey() < traverseNode.getRight()
-					.getKey()) {
-				if (traverseNode.getLeft().getKey() < traverseNode.getKey()) {
-					tempKey = traverseNode.getKey();
-					tempValue = traverseNode.element();
-					traverseNode.setKey(traverseNode.getLeft().getKey());
-					traverseNode.setValue(traverseNode.getLeft().element());
-					traverseNode.getLeft().setKey(tempKey);
-					traverseNode.getLeft().setValue(tempValue);
+						traverseNode = traverseNode.getLeft();
+					} else
+						break;
+				} else {
+					if (traverseNode.getRight().getKey() < traverseNode
+							.getKey()) {
+						tempKey = traverseNode.getKey();
+						tempValue = traverseNode.element();
+						traverseNode.setKey(traverseNode.getRight().getKey());
+						traverseNode
+								.setValue(traverseNode.getRight().element());
+						traverseNode.getRight().setKey(tempKey);
+						traverseNode.getRight().setValue(tempValue);
 
-					traverseNode = traverseNode.getLeft();
-				} else
-					break;
-			} else {
-				if (traverseNode.getRight().getKey() < traverseNode.getKey()) {
-					tempKey = traverseNode.getKey();
-					tempValue = traverseNode.element();
-					traverseNode.setKey(traverseNode.getRight().getKey());
-					traverseNode.setValue(traverseNode.getRight().element());
-					traverseNode.getRight().setKey(tempKey);
-					traverseNode.getRight().setValue(tempValue);
-
-					traverseNode = traverseNode.getRight();
-				} else
-					break;
+						traverseNode = traverseNode.getRight();
+					} else
+						break;
+				}
 			}
-
+			// set 2nd to lastNode to lastNode
+			lastNode = tree.getLast();
 		}
-
-		// set 2nd to lastNode to lastNode
-		lastNode = tree.getLast();
 
 		return new Node(oldRootKey, null, oldRootValue);
 	}
@@ -229,14 +254,34 @@ public class FlexHeap {
 	 * Transforms a min-heap to a max-heap if applicable.
 	 */
 	public void switchMaxHeap() {
+		heapType = HeapType.MAX_HEAP;
 
+		Node[] array = new Node[tree.size()];
+
+		for (int i = 0; i < array.length; i++)
+			array[i] = removeMin();
+
+		tree = new BinaryTree();
+
+		for (int i = array.length-1; i >= 0; i--)
+			insert(array[i]);
 	}
 
 	/**
 	 * Transforms a max-heap to a max-heap if applicable.
 	 */
 	public void switchMinHeap() {
+		heapType = HeapType.MIN_HEAP;
 
+		Node[] array = new Node[tree.size()];
+
+		for (int i = 0; i < array.length; i++) 
+			array[i] = removeMax();
+
+		tree = new BinaryTree();
+
+		for (int i = 0; i < array.length; i++)
+			insert(array[i]);
 	}
 
 	/**

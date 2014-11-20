@@ -35,6 +35,12 @@ public class FlexHeapDriver {
 		
 		flexHeap.remove();
 		System.out.println(flexHeap);
+		
+		flexHeap.switchMaxHeap();
+		System.out.println(flexHeap);
+		
+		flexHeap.switchMinHeap();
+		System.out.println(flexHeap);
 	}
 
 }
