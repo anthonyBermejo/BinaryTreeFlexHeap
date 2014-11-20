@@ -156,6 +156,13 @@ public class ArrayList {
 	}
 
 	/**
+	 * Decreases the size of the array by one, after a Node is removed.
+	 */
+	public void remove() {
+		size--;
+	}
+
+	/**
 	 * Replaces the element at the given index with the value being sent in
 	 * 
 	 * @param index

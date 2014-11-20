@@ -95,6 +95,12 @@ public class FlexHeap {
 		}
 	}
 
+	/**
+	 * Removes the smallest or biggest Node of the heap and rearranges the rest
+	 * of the Nodes.
+	 * 
+	 * @return the smallest or biggest Node which is the root of the heap
+	 */
 	public Node remove() {
 		Node removed = null;
 
@@ -103,6 +109,7 @@ public class FlexHeap {
 		else
 			removed = removeMax();
 
+		tree.remove();
 		return removed;
 	}
 
@@ -159,7 +166,7 @@ public class FlexHeap {
 		return new Node(oldRootKey, null, oldRootValue);
 	}
 
-	/**
+	/*
 	 * Removes and returns the element with the smallest or biggest key value
 	 * depending on the heap status. Repairs the heap afterwards.
 	 * 

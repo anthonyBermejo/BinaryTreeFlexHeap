@@ -169,6 +169,14 @@ public class BinaryTree {
 	}
 
 	/**
+	 * Wrapper method used to decrease the size of the binary tree once a Node
+	 * is removed.
+	 */
+	public void remove(){
+		list.remove();
+	}
+
+	/**
 	 * Returns the parent of the specified node.
 	 * 
 	 * @param n
