@@ -103,185 +103,123 @@ public class FlexHeap {
 	 */
 	public Node remove() {
 		Node removed = null;
+		char oldRootValue = tree.root().element();
+		int oldRootKey = tree.root().getKey();
 
-		if (heapType == HeapType.MIN_HEAP)
-			removed = removeMin();
-		else
-			removed = removeMax();
+		if (tree.size() > 1) {
+			tree.root().setKey(lastNode.getKey());
+			tree.root().setValue(lastNode.element());
 
+			Node traverseNode = tree.root();
+
+			// set lastNode to null
+			Node node = tree.getLast();
+
+			// set the child of its parent to null
+			if (node.getParent().getLeft().equals(node))
+				node.getParent().setLeft(null);
+			else
+				node.getParent().setRight(null);
+
+			// set null within array
+			tree.set(node, null, false);
+			tree.remove();
+
+			while (traverseNode.getLeft() != null
+					&& traverseNode.getRight() != null) {
+				// heap is a min-heap therefore switching to a max-heap
+				// comparing a parent's key less than its children's
+				if (heapType == HeapType.MIN_HEAP) {
+					// compare two children's keys and determine which one is
+					// greater
+					if (traverseNode.getLeft().getKey() < traverseNode
+							.getRight().getKey()) {
+						// determine whether the left child is less than the
+						// parent; swap their values afterwards
+						if (traverseNode.getLeft().getKey() < traverseNode
+								.getKey()) {
+							traverseNode = swapLeftWithParent(traverseNode);
+						} else
+							break; // no upheaping is necessary, break out of
+									// loop
+					} else {
+						// determine whether the right child is less than the
+						// parent; swap their values afterwards
+						if (traverseNode.getRight().getKey() < traverseNode
+								.getKey()) {
+							traverseNode = swapRightWithParent(traverseNode);
+						} else
+							break; // no upheaping is necessary, break out of
+									// loop
+					}
+				} else {
+					// heap is a max-heap therefore switching to a min-heap
+					// comparing a parent's key greater than its children's
+					if (traverseNode.getLeft().getKey() > traverseNode
+							.getRight().getKey()) {
+						// determine whether the left child is greater than the
+						// parent; swap their values afterwards
+						if (traverseNode.getLeft().getKey() > traverseNode
+								.getKey()) {
+							traverseNode = swapLeftWithParent(traverseNode);
+						} else
+							break; // no upheaping is necessary, break out of
+									// loop
+					} else {
+						// determine whether the right child is greater than the
+						// parent; swap their values afterwards
+						if (traverseNode.getRight().getKey() > traverseNode
+								.getKey()) {
+							traverseNode = swapRightWithParent(traverseNode);
+						} else
+							break; // no upheaping is necessary, break out of
+									// loop
+					}
+				}
+			}
+
+			// set 2nd to lastNode to lastNode
+			lastNode = tree.getLast();
+		}
+
+		removed = new Node(oldRootKey, null, oldRootValue);
 		return removed;
-	}
-
-	private Node removeMax() {
-		char oldRootValue = tree.root().element();
-		int oldRootKey = tree.root().getKey();
-		int tempKey;
-		char tempValue;
-
-		if (tree.size() > 1) {
-			
-			tree.root().setKey(lastNode.getKey());
-			tree.root().setValue(lastNode.element());
-
-			Node traverseNode = tree.root();
-
-			// set lastNode to null
-			Node node = tree.getLast();
-			
-			// set the child of its parents to null
-			if (node.getParent().getLeft().equals(node))
-				node.getParent().setLeft(null);
-			else
-				node.getParent().setRight(null);
-			
-			// set null within array
-			tree.set(node, null, false);
-			tree.remove();
-			
-			while (traverseNode.getLeft() != null
-					&& traverseNode.getRight() != null) {
-
-				if (traverseNode.getLeft().getKey() > traverseNode.getRight()
-						.getKey()) {
-					if (traverseNode.getLeft().getKey() > traverseNode.getKey()) {
-						tempKey = traverseNode.getKey();
-						tempValue = traverseNode.element();
-						traverseNode.setKey(traverseNode.getLeft().getKey());
-						traverseNode.setValue(traverseNode.getLeft().element());
-						traverseNode.getLeft().setKey(tempKey);
-						traverseNode.getLeft().setValue(tempValue);
-
-						traverseNode = traverseNode.getLeft();
-					} else
-						break;
-				} else {
-					if (traverseNode.getRight().getKey() > traverseNode
-							.getKey()) {
-						tempKey = traverseNode.getKey();
-						tempValue = traverseNode.element();
-						traverseNode.setKey(traverseNode.getRight().getKey());
-						traverseNode
-								.setValue(traverseNode.getRight().element());
-						traverseNode.getRight().setKey(tempKey);
-						traverseNode.getRight().setValue(tempValue);
-
-						traverseNode = traverseNode.getRight();
-					} else
-						break;
-				}
-
-			}
-
-			// set 2nd to lastNode to lastNode
-			lastNode = tree.getLast();
-		}
-
-		return new Node(oldRootKey, null, oldRootValue);
-	}
-
-	/*
-	 * Removes and returns the element with the smallest or biggest key value
-	 * depending on the heap status. Repairs the heap afterwards.
-	 * 
-	 * @return the removed element
-	 */
-	private Node removeMin() {
-		char oldRootValue = tree.root().element();
-		int oldRootKey = tree.root().getKey();
-		int tempKey;
-		char tempValue;
-
-		if (tree.size() > 1) {
-			
-			tree.root().setKey(lastNode.getKey());
-			tree.root().setValue(lastNode.element());
-
-			Node traverseNode = tree.root();
-
-			// set lastNode to null
-			Node node = tree.getLast();
-			
-			// set the child of its parents to null
-			if (node.getParent().getLeft().equals(node))
-				node.getParent().setLeft(null);
-			else
-				node.getParent().setRight(null);
-			
-			// set null within array
-			tree.set(node, null, false);
-			tree.remove();
-			
-			while (traverseNode.getLeft() != null
-					&& traverseNode.getRight() != null) {
-
-				if (traverseNode.getLeft().getKey() < traverseNode.getRight()
-						.getKey()) {
-					if (traverseNode.getLeft().getKey() < traverseNode.getKey()) {
-						tempKey = traverseNode.getKey();
-						tempValue = traverseNode.element();
-						traverseNode.setKey(traverseNode.getLeft().getKey());
-						traverseNode.setValue(traverseNode.getLeft().element());
-						traverseNode.getLeft().setKey(tempKey);
-						traverseNode.getLeft().setValue(tempValue);
-
-						traverseNode = traverseNode.getLeft();
-					} else
-						break;
-				} else {
-					if (traverseNode.getRight().getKey() < traverseNode
-							.getKey()) {
-						tempKey = traverseNode.getKey();
-						tempValue = traverseNode.element();
-						traverseNode.setKey(traverseNode.getRight().getKey());
-						traverseNode
-								.setValue(traverseNode.getRight().element());
-						traverseNode.getRight().setKey(tempKey);
-						traverseNode.getRight().setValue(tempValue);
-
-						traverseNode = traverseNode.getRight();
-					} else
-						break;
-				}
-			}
-			// set 2nd to lastNode to lastNode
-			lastNode = tree.getLast();
-		}
-
-		return new Node(oldRootKey, null, oldRootValue);
 	}
 
 	/**
 	 * Transforms a min-heap to a max-heap if applicable.
 	 */
 	public void switchMaxHeap() {
-		heapType = HeapType.MAX_HEAP;
+		if (heapType == HeapType.MIN_HEAP) {
+			Node[] array = new Node[tree.size()];
 
-		Node[] array = new Node[tree.size()];
+			for (int i = 0; i < array.length; i++)
+				array[i] = remove();
 
-		for (int i = 0; i < array.length; i++)
-			array[i] = removeMin();
+			tree = new BinaryTree();
+			heapType = HeapType.MAX_HEAP;
 
-		tree = new BinaryTree();
-
-		for (int i = array.length-1; i >= 0; i--)
-			insert(array[i]);
+			for (int i = array.length - 1; i >= 0; i--)
+				insert(array[i]);
+		}
 	}
 
 	/**
-	 * Transforms a max-heap to a max-heap if applicable.
+	 * Transforms a max-heap to a min-heap if applicable.
 	 */
 	public void switchMinHeap() {
-		heapType = HeapType.MIN_HEAP;
+		if (heapType == HeapType.MAX_HEAP) {
+			Node[] array = new Node[tree.size()];
 
-		Node[] array = new Node[tree.size()];
+			for (int i = 0; i < array.length; i++)
+				array[i] = remove();
 
-		for (int i = 0; i < array.length; i++) 
-			array[i] = removeMax();
+			tree = new BinaryTree();
+			heapType = HeapType.MIN_HEAP;
 
-		tree = new BinaryTree();
-
-		for (int i = 0; i < array.length; i++)
-			insert(array[i]);
+			for (int i = array.length - 1; i >= 0; i--)
+				insert(array[i]);
+		}
 	}
 
 	/**
@@ -305,12 +243,54 @@ public class FlexHeap {
 
 	// private methods
 
+	/*
+	 * Finds the first parent that is a left child of the specified node; until
+	 * it reaches the root
+	 */
 	private Node findLeftChildParent(Node n) {
 		if (n.equals(tree.root()))
 			return n;
 		if (n.equals(n.getParent().getLeft()))
 			return n;
 		return findLeftChildParent(n.getParent());
+	}
+
+	/*
+	 * Swaps the left child's value and key with its parent's
+	 */
+	private Node swapLeftWithParent(Node traverseNode) {
+		int tempKey;
+		char tempValue;
+
+		tempKey = traverseNode.getKey();
+		tempValue = traverseNode.element();
+		traverseNode.setKey(traverseNode.getLeft().getKey());
+		traverseNode.setValue(traverseNode.getLeft().element());
+		traverseNode.getLeft().setKey(tempKey);
+		traverseNode.getLeft().setValue(tempValue);
+
+		traverseNode = traverseNode.getLeft();
+
+		return traverseNode;
+	}
+
+	/*
+	 * Swaps the right child's value and key its parent's
+	 */
+	private Node swapRightWithParent(Node traverseNode) {
+		int tempKey;
+		char tempValue;
+
+		tempKey = traverseNode.getKey();
+		tempValue = traverseNode.element();
+		traverseNode.setKey(traverseNode.getRight().getKey());
+		traverseNode.setValue(traverseNode.getRight().element());
+		traverseNode.getRight().setKey(tempKey);
+		traverseNode.getRight().setValue(tempValue);
+
+		traverseNode = traverseNode.getRight();
+
+		return traverseNode;
 	}
 
 	/*

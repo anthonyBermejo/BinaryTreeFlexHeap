@@ -20,7 +20,7 @@ public class FlexHeapDriver {
 
 		flexHeap.insert(new Node(21, null, 'm'));
 		System.out.println(flexHeap);
-		
+
 		flexHeap.insert(new Node(1, null, 'A'));
 		System.out.println(flexHeap);
 
@@ -32,14 +32,17 @@ public class FlexHeapDriver {
 
 		flexHeap.insert(new Node(2, null, 'A'));
 		System.out.println(flexHeap);
-		
+
 		flexHeap.remove();
 		System.out.println(flexHeap);
-		
+
 		flexHeap.switchMaxHeap();
 		System.out.println(flexHeap);
-		
+
 		flexHeap.switchMinHeap();
+		System.out.println(flexHeap);
+
+		flexHeap.toggleHeap();
 		System.out.println(flexHeap);
 	}
 
