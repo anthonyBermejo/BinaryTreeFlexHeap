@@ -69,10 +69,15 @@ public class BinaryTree {
 		return list.get(n);
 	}
 
+	/**
+	 * Returns the last node within the binary tree.
+	 * 
+	 * @return the last node which is not null
+	 */
 	public Node getLast() {
 		return list.getLast();
 	}
-	
+
 	/**
 	 * Verifies whether the specified node has a left child.
 	 * 
@@ -244,7 +249,19 @@ public class BinaryTree {
 	public Node root() {
 		return list.get(1);
 	}
-	
+
+	/**
+	 * Finds either the first or last index of the first node and sets the
+	 * values of the second node to the values of the first node.
+	 * 
+	 * @param node1
+	 *            the node which will be changed
+	 * @param node2
+	 *            the node which values will be used for the change
+	 * @param findFirstIndex
+	 *            true if the first index should be used; false if the last
+	 *            index should be used.
+	 */
 	public void set(Node node1, Node node2, boolean findFirstIndex) {
 		list.set(node1, node2, findFirstIndex);
 	}
@@ -260,7 +277,7 @@ public class BinaryTree {
 			if (list.get(1) == null)
 				list.add(1, n);
 			else
-				list.set(1, n); 
+				list.set(1, n);
 		}
 	}
 

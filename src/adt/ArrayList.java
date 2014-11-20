@@ -73,6 +73,11 @@ public class ArrayList {
 		return aNode;
 	}
 
+	/**
+	 * Returns the last Node within the array list.
+	 * 
+	 * @return last node which is not null
+	 */
 	public Node getLast() {
 		Node aNode = null;
 
@@ -89,49 +94,21 @@ public class ArrayList {
 	 * Returns the index of a specific node in the array list. Returns -1 if not
 	 * found
 	 * 
-	 * @param p
+	 * @param n
 	 *            Node to be found in array list
 	 * @return Index of node, -1 if not found
 	 */
-	public int indexOf(Node p) {
+	public int indexOf(Node n) {
 		int index = -1;
 
-		if (p != null) {
+		if (n != null) {
 			boolean found = false;
 
 			for (int i = 0; i <= array.length && !found; i++) {
 				if (array[i] == null)
 					continue;
-				if (p.getKey() == array[i].getKey()
-						&& p.element() == array[i].element()) {
-					index = i;
-					found = true;
-				}
-			}
-		}
-
-		return index;
-	}
-
-	/**
-	 * Returns the last index of a specific node in the array list. Returns -1
-	 * if not found
-	 * 
-	 * @param p
-	 *            Node to be found in array list
-	 * @return Index of node, -1 if not found
-	 */
-	public int lastIndexOf(Node p) {
-		int index = -1;
-
-		if (p != null) {
-			boolean found = false;
-
-			for (int i = array.length - 1; i >= 1 && !found; i--) {
-				if (array[i] == null)
-					continue;
-				if (p.getKey() == array[i].getKey()
-						&& p.element() == array[i].element()) {
+				if (n.getKey() == array[i].getKey()
+						&& n.element() == array[i].element()) {
 					index = i;
 					found = true;
 				}
@@ -148,6 +125,34 @@ public class ArrayList {
 	 */
 	public boolean isEmpty() {
 		return (size == 0);
+	}
+
+	/**
+	 * Returns the last index of a specific node in the array list. Returns -1
+	 * if not found
+	 * 
+	 * @param n
+	 *            Node to be found in array list
+	 * @return Index of node, -1 if not found
+	 */
+	public int lastIndexOf(Node n) {
+		int index = -1;
+
+		if (n != null) {
+			boolean found = false;
+
+			for (int i = array.length - 1; i >= 1 && !found; i--) {
+				if (array[i] == null)
+					continue;
+				if (n.getKey() == array[i].getKey()
+						&& n.element() == array[i].element()) {
+					index = i;
+					found = true;
+				}
+			}
+		}
+
+		return index;
 	}
 
 	/**
@@ -172,10 +177,22 @@ public class ArrayList {
 		return oldNode;
 	}
 
+	/**
+	 * Finds either the first or last index of the first node and sets the
+	 * values of the second node to the values of the first node.
+	 * 
+	 * @param node1
+	 *            the node which will be changed
+	 * @param node2
+	 *            the node which values will be used for the change
+	 * @param findFirstIndex
+	 *            true if the first index should be used; false if the last
+	 *            index should be used.
+	 */
 	public void set(Node node1, Node node2, boolean findFirstIndex) {
 		if (findFirstIndex)
 			array[indexOf(node1)] = node2;
-		else 
+		else
 			array[lastIndexOf(node1)] = node2;
 	}
 
