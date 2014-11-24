@@ -191,10 +191,22 @@ public class FlexHeap {
 	 */
 	public void switchMaxHeap() {
 		if (heapType == HeapType.MIN_HEAP) {
-			Node[] array = new Node[tree.size()];
+			Node[] array = new Node[tree.size()+1];
+			Node temp;
 
-			for (int i = 0; i < array.length; i++)
-				array[i] = remove();
+			// create deep copies of node in heap into array
+			for (int i = 1; i < array.length; i++) {
+				array[i] = new Node(tree.get(i).getKey(), null, tree.get(i).element());
+			}
+			
+			// in place sorting
+			for (int i = 1; i < array.length - 1; i++) {
+				if (array[i + 1].getKey() < array[i].getKey()) {
+					temp = array[i];
+					array[i] = array[i+1];
+					array[i+1] = temp;
+				}
+			}
 
 			tree = new BinaryTree();
 			heapType = HeapType.MAX_HEAP;
@@ -209,10 +221,22 @@ public class FlexHeap {
 	 */
 	public void switchMinHeap() {
 		if (heapType == HeapType.MAX_HEAP) {
-			Node[] array = new Node[tree.size()];
+			Node[] array = new Node[tree.size()+1];
+			Node temp = null;
 
-			for (int i = 0; i < array.length; i++)
-				array[i] = remove();
+			// create deep copies of node in heap into array
+			for (int i = 1; i < array.length; i++) {
+				array[i] = new Node(tree.get(i).getKey(), null, tree.get(i).element());
+			}
+			
+			// in place sorting
+			for (int i = 1; i < array.length - 1; i++) {
+				if (array[i + 1].getKey() > array[i].getKey()) {
+					temp = array[i];
+					array[i] = array[i+1];
+					array[i+1] = temp;
+				}
+			}
 
 			tree = new BinaryTree();
 			heapType = HeapType.MIN_HEAP;

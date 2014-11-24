@@ -68,6 +68,17 @@ public class BinaryTree {
 	public Node get(Node n) {
 		return list.get(n);
 	}
+	
+	/**
+	 * Returns the node within the binary tree at specified index
+	 * 
+	 * @param index
+	 *            Index where not to be found is located at
+	 * @return Null, if not found, Reference to the node if found
+	 */
+	public Node get(int index) {
+		return list.get(index);
+	}
 
 	/**
 	 * Returns the last node within the binary tree.
