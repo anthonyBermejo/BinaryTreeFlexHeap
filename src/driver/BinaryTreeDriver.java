@@ -1,5 +1,7 @@
 package driver;
 
+import java.util.Iterator;
+
 import adt.*;
 
 public class BinaryTreeDriver {
@@ -72,7 +74,25 @@ public class BinaryTreeDriver {
 
 		tree.setRoot(new Node(1, null, 'a'));
 		System.out.println(tree);
-
+		
+		Iterator<Node> it = tree.iterator();
+		
+		while (it.hasNext())
+			System.out.println(it.next());
+		
+		System.out.println();
+		for (Node n : tree.positions())
+			System.out.println(n);
+		
+		System.out.println();
+		for (Node n : tree.children(tree.root()))
+			System.out.println(n);
+		
+	
+		System.out.println();
+		Iterable<Node> noChildren = tree.children(tree.root().getLeft().getLeft());
+		for (Node n : noChildren)
+			System.out.println(n);
 	}
 
 }

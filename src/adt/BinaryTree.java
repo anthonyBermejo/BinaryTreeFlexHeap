@@ -1,5 +1,7 @@
 package adt;
 
+import java.util.Iterator;
+
 import exceptions.NodeNotFoundException;
 import adt.ArrayList;
 
@@ -8,7 +10,7 @@ import adt.ArrayList;
  * 
  * @author Anthony-Virgil Bermejo (6982166), Venelin Koulaxazov (6982425)
  */
-public class BinaryTree {
+public class BinaryTree implements Iterable<Node> {
 
 	// member variable declarations
 	private ArrayList list;
@@ -19,6 +21,19 @@ public class BinaryTree {
 	public BinaryTree() {
 		list = new ArrayList();
 	}
+	
+    @Override
+    public Iterator<Node> iterator() {
+    	return list.iterator();
+    }
+    
+    public Iterable<Node> positions() {
+        return list.positions();
+    }
+    
+    public Iterable<Node> children(Node n) {
+    	return list.children(n);
+    }
 
 	/**
 	 * Adds a left child to the specified node.

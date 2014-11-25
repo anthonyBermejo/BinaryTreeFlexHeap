@@ -1,13 +1,14 @@
 package adt;
 
 import java.util.Arrays;
+import java.util.Iterator;
 
 /**
  * Definition of the ArrayList ADT.
  * 
  * @author Anthony-Virgil Bermejo (6982166), Venelin Koulaxazov (6982425)
  */
-public class ArrayList {
+public class ArrayList implements Iterable<Node> {
 
 	// member variable declarations
 	private Node[] array;
@@ -18,6 +19,43 @@ public class ArrayList {
 	 */
 	public ArrayList() {
 		array = new Node[10];
+	}
+	
+	@Override
+	public Iterator<Node> iterator() {
+		Iterator<Node> it = new Iterator<Node>() {
+
+			private int currentIndex = 0;
+
+			@Override
+			public boolean hasNext() {
+				return currentIndex < capacity();
+			}
+
+			@Override
+			public Node next() {
+				return array[currentIndex++];
+			}
+
+			@Override
+			public void remove() {
+				// TODO Auto-generated method stub
+			}
+		};
+		return it;
+	}
+	
+	public Iterable<Node> positions() {
+		return this;
+	}
+
+	public Iterable<Node> children(Node n) {
+		ArrayList list = new ArrayList();
+		
+		list.add(0, n.getLeft());
+		list.add(1, n.getRight());
+	
+		return list;
 	}
 
 	/**
@@ -33,6 +71,15 @@ public class ArrayList {
 		checkArraySize(index);
 		if (value != null)
 			array[index] = value;
+	}
+
+	/**
+	 * Returns the capacity of the array list
+	 * 
+	 * @return Capaci
+	 */
+	public int capacity() {
+		return array.length;
 	}
 
 	/**
@@ -179,6 +226,8 @@ public class ArrayList {
 		if (value != null && array[index] != null) {
 			oldNode = new Node(array[index].getKey(), array[index].getParent(),
 					array[index].element());
+			value.setLeft(array[index].getLeft());
+			value.setRight(array[index].getRight());
 			array[index] = value;
 		}
 		return oldNode;
