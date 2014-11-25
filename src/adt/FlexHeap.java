@@ -202,7 +202,7 @@ public class FlexHeap {
 	public void switchMinHeap() {
 		if (heapType == HeapType.MAX_HEAP) {
 			runDownHeap(tree.root());
-			heapType = HeapType.MIN_HEAP;
+			heapType = HeapType.MIN_HEAP; 
 		}
 	}
 
