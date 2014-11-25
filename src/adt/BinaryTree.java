@@ -21,34 +21,39 @@ public class BinaryTree implements Iterable<Node> {
 	public BinaryTree() {
 		list = new ArrayList();
 	}
-	
+
 	/**
 	 * Returns an Iterator of the BinaryTree
 	 */
-    @Override
-    public Iterator<Node> iterator() {
-    	return list.iterator();
-    }
-    
-    /**
-     * Returns an Iterable collection of entire BinaryTree
-     * @return Iterable collection of entire BinaryTree
-     */
-    public Iterable<Node> positions() {
-        return list.positions();
-    }
-    
-    /**
-     * Returns an Iterable collection of the children of Node n
-     * @param n - Parent of children in collection
-     * @return Iterable collection of children of Node n
-     */
+	@Override
+	public Iterator<Node> iterator() {
+		return list.iterator();
+	}
+
+	/**
+	 * Returns an Iterable collection of entire BinaryTree
+	 * 
+	 * @return Iterable collection of entire BinaryTree
+	 */
+	public Iterable<Node> positions() {
+		return list.positions();
+	}
+
+	/**
+	 * Returns an Iterable collection of the children of Node n
+	 * 
+	 * @param n
+	 *            - Parent of children in collection
+	 * @return Iterable collection of children of Node n
+	 */
 	public Iterable<Node> children(Node n) {
 		ArrayList list = new ArrayList();
-		
-		list.add(0, n.getLeft());
-		list.add(1, n.getRight());
-	
+
+		if (n != null) {
+			list.add(0, n.getLeft());
+			list.add(1, n.getRight());
+		}
+
 		return list;
 	}
 
@@ -100,7 +105,7 @@ public class BinaryTree implements Iterable<Node> {
 	public Node get(Node n) {
 		return list.get(n);
 	}
-	
+
 	/**
 	 * Returns the node within the binary tree at specified index
 	 * 
@@ -215,7 +220,7 @@ public class BinaryTree implements Iterable<Node> {
 	 * Wrapper method used to decrease the size of the binary tree once a Node
 	 * is removed.
 	 */
-	public void remove(){
+	public void remove() {
 		list.remove();
 	}
 
