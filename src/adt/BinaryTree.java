@@ -22,18 +22,35 @@ public class BinaryTree implements Iterable<Node> {
 		list = new ArrayList();
 	}
 	
+	/**
+	 * Returns an Iterator of the BinaryTree
+	 */
     @Override
     public Iterator<Node> iterator() {
     	return list.iterator();
     }
     
+    /**
+     * Returns an Iterable collection of entire BinaryTree
+     * @return Iterable collection of entire BinaryTree
+     */
     public Iterable<Node> positions() {
         return list.positions();
     }
     
-    public Iterable<Node> children(Node n) {
-    	return list.children(n);
-    }
+    /**
+     * Returns an Iterable collection of the children of Node n
+     * @param n - Parent of children in collection
+     * @return Iterable collection of children of Node n
+     */
+	public Iterable<Node> children(Node n) {
+		ArrayList list = new ArrayList();
+		
+		list.add(0, n.getLeft());
+		list.add(1, n.getRight());
+	
+		return list;
+	}
 
 	/**
 	 * Adds a left child to the specified node.

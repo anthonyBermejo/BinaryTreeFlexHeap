@@ -21,6 +21,9 @@ public class ArrayList implements Iterable<Node> {
 		array = new Node[10];
 	}
 	
+	/**
+	 * Returns an Iterator of the ArrayList
+	 */
 	@Override
 	public Iterator<Node> iterator() {
 		Iterator<Node> it = new Iterator<Node>() {
@@ -45,17 +48,12 @@ public class ArrayList implements Iterable<Node> {
 		return it;
 	}
 	
+	/**
+	 * Returns an Iterable collection of entire ArrayList
+	 * @return Iterable collection of ArrayList
+	 */
 	public Iterable<Node> positions() {
 		return this;
-	}
-
-	public Iterable<Node> children(Node n) {
-		ArrayList list = new ArrayList();
-		
-		list.add(0, n.getLeft());
-		list.add(1, n.getRight());
-	
-		return list;
 	}
 
 	/**
