@@ -191,64 +191,8 @@ public class FlexHeap {
 	 */
 	public void switchMaxHeap() {
 		if (heapType == HeapType.MIN_HEAP) {
-			 convert(tree.root());
-
-//			Node[] array = new Node[tree.size() + 1];
-//			Node temp;
-//
-//			// create deep copies of node in heap into array
-//			for (int i = 1; i < array.length; i++) {
-//				array[i] = new Node(tree.get(i).getKey(), null, tree.get(i)
-//						.element());
-//			}
-//
-//			// in place sorting
-//			for (int i = 1; i < array.length - 1; i++) {
-//				if (array[i + 1].getKey() < array[i].getKey()) {
-//					temp = array[i];
-//					array[i] = array[i + 1];
-//					array[i + 1] = temp;
-//				}
-//			}
-//
-//			tree = new BinaryTree();
-//			heapType = HeapType.MAX_HEAP;
-//
-//			for (int i = array.length - 1; i >= 0; i--)
-//				insert(array[i]);
-
-			 heapType = HeapType.MAX_HEAP;
-		}
-	}
-
-	private void convert(Node node) {
-		if (tree.isExternal(node))
-			return;
-		convert(node.getLeft());
-		convert(node.getRight());
-
-		fixHeap(node);
-	}
-
-	private void fixHeap(Node node) {
-		if (tree.isExternal(node))
-			return;
-		if (node.getLeft().getKey() > node.getRight().getKey()) {
-			int tempKey = node.getKey();
-			char tempValue = node.element();
-			node.setKey(node.getLeft().getKey());
-			node.setValue(node.getLeft().element());
-			node.getLeft().setKey(tempKey);
-			node.getLeft().setValue(tempValue);
-			fixHeap(node.getLeft());
-		} else {
-			int tempKey = node.getKey();
-			char tempValue = node.element();
-			node.setKey(node.getRight().getKey());
-			node.setValue(node.getRight().element());
-			node.getRight().setKey(tempKey);
-			node.getRight().setValue(tempValue);
-			fixHeap(node.getRight());
+			runDownHeap(tree.root());
+			heapType = HeapType.MAX_HEAP;
 		}
 	}
 
@@ -257,29 +201,8 @@ public class FlexHeap {
 	 */
 	public void switchMinHeap() {
 		if (heapType == HeapType.MAX_HEAP) {
-			Node[] array = new Node[tree.size() + 1];
-			Node temp = null;
-
-			// create deep copies of node in heap into array
-			for (int i = 1; i < array.length; i++) {
-				array[i] = new Node(tree.get(i).getKey(), null, tree.get(i)
-						.element());
-			}
-
-			// in place sorting
-			for (int i = 1; i < array.length - 1; i++) {
-				if (array[i + 1].getKey() > array[i].getKey()) {
-					temp = array[i];
-					array[i] = array[i + 1];
-					array[i + 1] = temp;
-				}
-			}
-
-			tree = new BinaryTree();
+			runDownHeap(tree.root());
 			heapType = HeapType.MIN_HEAP;
-
-			for (int i = array.length - 1; i >= 0; i--)
-				insert(array[i]);
 		}
 	}
 
@@ -305,6 +228,26 @@ public class FlexHeap {
 	// private methods
 
 	/*
+	 * Swaps child elements depending on the heap type with the parent
+	 * recursively until specified node is external.
+	 */
+	private void downHeap(Node node) {
+		if (tree.isExternal(node))
+			return;
+		if (heapType == HeapType.MIN_HEAP) {
+			if (node.getLeft().getKey() > node.getRight().getKey())
+				downHeap(swapLeftWithParent(node));
+			else
+				downHeap(swapRightWithParent(node));
+		} else {
+			if (node.getLeft().getKey() < node.getRight().getKey())
+				downHeap(swapLeftWithParent(node));
+			else
+				downHeap(swapRightWithParent(node));
+		}
+	}
+
+	/*
 	 * Finds the first parent that is a left child of the specified node; until
 	 * it reaches the root
 	 */
@@ -314,6 +257,19 @@ public class FlexHeap {
 		if (n.equals(n.getParent().getLeft()))
 			return n;
 		return findLeftChildParent(n.getParent());
+	}
+
+	/*
+	 * Goes through every element within the heap and calls the downHeap method
+	 * to swap values if necessary.
+	 */
+	private void runDownHeap(Node node) {
+		if (tree.isExternal(node))
+			return;
+		runDownHeap(node.getLeft());
+		runDownHeap(node.getRight());
+
+		downHeap(node);
 	}
 
 	/*
